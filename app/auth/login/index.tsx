@@ -1,26 +1,28 @@
+import EmailIcon from "@/components/icons/IconEmail";
+import IconLock from "@/components/icons/IconLock";
 import { Button } from "@/components/ui/button";
+import Loader from "@/components/ui/loader";
+import SafeAreaView from "@/components/ui/safeAreaView";
 import TextInput from "@/components/ui/textInput";
 import TextLink from "@/components/ui/textLink";
 import { Typography } from "@/components/ui/typography";
 import View from "@/components/view";
-import { DEVELOPMENT_MODE } from "@/constants";
-import { useAuthActions } from "@/store/userStore";
-import { useNavigation, useRouter } from "expo-router";
-import { Controller, useForm } from "react-hook-form";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useAuthLogin } from "@/services/user/api";
 import { setItem } from "@/lib/async-storage";
-import Toast from "react-native-toast-message";
-import Loader from "@/components/ui/loader";
+import { useAuthLogin } from "@/services/user/api";
 import {
   PostLoginPayload,
   postLoginPayloadSchema,
 } from "@/services/user/validation";
+import { useAuthActions } from "@/store/userStore";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigation, useRouter } from "expo-router";
+import React from "react";
+import { Controller, useForm } from "react-hook-form";
+import { Image, ImageBackground, StyleSheet } from "react-native";
+import Toast from "react-native-toast-message";
 
 export default function Login() {
   const router = useRouter();
-  const insets = useSafeAreaInsets();
   const navigation = useNavigation<any>();
 
   // store
@@ -30,8 +32,8 @@ export default function Login() {
 
   const { control, handleSubmit, formState } = useForm<PostLoginPayload>({
     defaultValues: {
-      email: "test@newus.id",
-      password: "123456",
+      email: "",
+      password: "",
     },
     resolver: zodResolver(postLoginPayloadSchema),
     mode: "all",
@@ -84,110 +86,158 @@ export default function Login() {
     mockLogin();
   });
 
-  return (
-    <View
-      backgroundColor="primary-50"
-      style={{ height: "100%", paddingTop: insets.top + 30 }}
-    >
-      <Typography fontSize={25} color="white" style={{ textAlign: "center" }}>
-        Masuk Akun
-      </Typography>
-      <View
-        backgroundColor="white"
-        style={{
-          height: "100%",
-          borderTopRightRadius: 30,
-          borderTopLeftRadius: 30,
-          marginTop: 20,
-          paddingHorizontal: 20,
-          flexDirection: "column",
-          gap: 15,
-          paddingTop: 30,
-        }}
-      >
-        <Controller
-          control={control}
-          name="email"
-          render={({ field, fieldState }) => (
-            <TextInput
-              label="Email"
-              placeholder="Contoh@gmail.com"
-              keyboardType="email-address"
-              borderRadius={17}
-              value={field.value}
-              onBlur={field.onBlur}
-              onChangeText={field.onChange}
-              errorMessage={fieldState.error?.message}
-            />
-          )}
-        />
-        <Controller
-          control={control}
-          name="password"
-          render={({ field, fieldState }) => (
-            <TextInput
-              label="Password"
-              placeholder="Kata Sandi"
-              secureTextEntry
-              borderRadius={17}
-              value={field.value}
-              onBlur={field.onBlur}
-              onChangeText={field.onChange}
-              errorMessage={fieldState.error?.message}
-            />
-          )}
-        />
+  const handleLoginWithGoogle = () => {};
 
-        <View style={{ alignItems: "flex-end" }}>
-          <TextLink
-            label="Lupa Password?"
-            fontSize={15}
-            onPress={() => router.replace("/auth/login")}
+  const handleToRegister = () => router.push("/auth/register");
+
+  const handleToForgotPassword = () => {};
+
+  return (
+    <ImageBackground
+      source={require("../../../assets/images/background.png")}
+      resizeMode="cover"
+      style={style.container}
+    >
+      <SafeAreaView style={style.container}>
+        <View backgroundColor="white" style={style.card}>
+          <Image
+            source={require("../../../assets/images/logo.png")}
+            style={style.logo}
           />
-        </View>
-        <Button
-          style={{ marginTop: 10 }}
-          disabled={!formState.isValid || loginMutation.isPending}
-          onPress={handleLoginMutation}
-        >
-          {loginMutation.isPending ? <Loader color="white" /> : "Login"}
-        </Button>
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "center",
-            marginTop: 5,
-          }}
-        >
-          <Typography fontSize={15}>Belum punya akun?</Typography>
-          <TextLink
-            label=" Daftar"
-            fontSize={15}
-            onPress={() => router.replace("/auth/register")}
+          <Typography
+            fontSize={16}
+            fontFamily="Poppins-Bold"
+            color="primary-500"
+            style={{ textAlign: "center", marginTop: 20 }}
+          >
+            Masuk ke Akun Anda
+          </Typography>
+          <Controller
+            control={control}
+            name="email"
+            render={({ field, fieldState }) => (
+              <TextInput
+                label="Email"
+                placeholder="Contoh@gmail.com"
+                keyboardType="email-address"
+                borderRadius={8}
+                value={field.value}
+                onBlur={field.onBlur}
+                onChangeText={field.onChange}
+                errorMessage={fieldState.error?.message}
+                iconBefore={<EmailIcon />}
+              />
+            )}
           />
+          <Controller
+            control={control}
+            name="password"
+            render={({ field, fieldState }) => (
+              <TextInput
+                label="Password"
+                placeholder="Kata Sandi"
+                secureTextEntry
+                borderRadius={8}
+                value={field.value}
+                onBlur={field.onBlur}
+                onChangeText={field.onChange}
+                errorMessage={fieldState.error?.message}
+                iconBefore={<IconLock />}
+              />
+            )}
+          />
+
+          <View style={{ alignItems: "flex-start" }}>
+            <TextLink
+              label="Lupa Password?"
+              fontSize={15}
+              color="primary-500"
+              fontFamily="Poppins-SemiBold"
+              onPress={handleToForgotPassword}
+            />
+            <Typography fontSize={10} color="text-secondary">
+              Silakan hubungi admin atau operator sekolah jika Anda lupa dengan
+              kata sandi Anda
+            </Typography>
+          </View>
+          <Button
+            style={style.marginTop10}
+            disabled={!formState.isValid || loginMutation.isPending}
+            onPress={handleLoginMutation}
+          >
+            {loginMutation.isPending ? <Loader color="white" /> : "Masuk"}
+          </Button>
+          <View style={style.noAccount}>
+            <Typography
+              fontSize={12}
+              fontFamily="Poppins-Bold"
+              color="text-secondary"
+            >
+              Belum punya akun?
+            </Typography>
+          </View>
+          <Button
+            style={style.marginTop10}
+            variant="outlined"
+            textColor="primary-500"
+            color="primary-500"
+            onPress={handleToRegister}
+          >
+            Daftar
+          </Button>
+
+          <Button
+            style={style.marginTop10}
+            variant="outlined"
+            textColor="black"
+            color="line"
+            disabled={!formState.isValid || loginMutation.isPending}
+            onPress={handleLoginWithGoogle}
+            iconBefore={
+              <Image
+                source={require("../../../assets/images/google.png")}
+                style={style.google}
+              />
+            }
+          >
+            Sign In with Google
+          </Button>
         </View>
-        <Typography style={{ textAlign: "center" }}>
-          Dengan masuk kesistem, Anda menyetujui{" "}
-          <Typography
-            color="primary-50"
-            fontFamily="Poppins-Medium"
-            onPress={() => router.push("/tnc")}
-          >
-            Syarat & Ketentuan
-          </Typography>{" "}
-          kami dan Anda telah membaca{" "}
-          <Typography
-            color="primary-50"
-            fontFamily="Poppins-Medium"
-            onPress={() => router.push("/pnp")}
-          >
-            {" "}
-            Kebijakan Privasi
-          </Typography>{" "}
-          kami
-        </Typography>
-      </View>
-    </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
+
+const style = StyleSheet.create({
+  container: {
+    flex: 1,
+    position: "relative",
+  },
+  card: {
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    flexDirection: "column",
+    gap: 15,
+    paddingVertical: 30,
+    marginVertical: "auto",
+    marginHorizontal: 20,
+  },
+  logo: {
+    width: 153,
+    height: 48,
+    alignSelf: "center",
+  },
+  google: {
+    width: 18,
+    height: 18,
+  },
+  marginTop10: {
+    marginTop: 10,
+  },
+  noAccount: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 5,
+  },
+});

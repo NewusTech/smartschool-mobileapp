@@ -1,13 +1,13 @@
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { Image, StyleSheet } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 
-import { useAppTheme } from "@/context/theme-context";
-import View from "../view";
-import { Typography } from "../ui/typography";
 import { AppColorUnion } from "@/constants/Colors";
-import TextInput from "../ui/textInput";
+import { useAppTheme } from "@/context/theme-context";
 import { IconMagnifyingGlass } from "../icons";
+
+import View from "@/components/view";
+import { Typography } from "../typography";
 
 export type DataItem = {
   title: string | number;
@@ -69,7 +69,7 @@ export function SelectInput(props: SelectInputProps) {
               styles.container,
               {
                 borderWidth: withBorder ? 1 : 0,
-                borderColor: isOpened ? Colors["primary-50"] : Colors[color],
+                borderColor: isOpened ? Colors["primary-500"] : Colors[color],
                 padding: withBorder ? padding : 0,
                 paddingHorizontal,
                 borderRadius,
@@ -111,7 +111,7 @@ export function SelectInput(props: SelectInputProps) {
             style={[
               styles.dropdownItemStyle,
               {
-                ...(isSelected && { backgroundColor: Colors["primary-50"] }),
+                ...(isSelected && { backgroundColor: Colors["primary-500"] }),
               },
             ]}
           >

@@ -8,11 +8,9 @@ export type LoaderProp = {
 };
 
 export default function Loader(props: LoaderProp) {
-  const { size = 44, color = "primary-50" } = props;
+  const { size = 44, color = "primary-500" } = props;
 
   const { Colors } = useAppTheme();
 
-  return (
-    <ActivityIndicator color={Colors[color]} size={size} />
-  );
+  return <ActivityIndicator color={Colors[color]} size={size} />;
 }

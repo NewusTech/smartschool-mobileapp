@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { IconCross } from "../../icons/IconCsross";
 
 type ModalSwipeProp = {
   children: React.ReactNode;

@@ -1,9 +1,9 @@
 import View from "@/components/view";
+import { useAppTheme } from "@/context/theme-context";
+import LottieView from "lottie-react-native";
 import React, { useRef } from "react";
 import { Modal, Pressable, TouchableOpacity } from "react-native";
 import { Typography } from "../typography";
-import { useAppTheme } from "@/context/theme-context";
-import LottieView from "lottie-react-native";
 
 type ModalAction = {
   visible: boolean;
@@ -83,7 +83,7 @@ export default function ModalSuccess({
             <TouchableOpacity
               style={{
                 width: "100%",
-                backgroundColor: Colors["primary-50"],
+                backgroundColor: Colors["primary-500"],
                 borderRadius: 15,
                 padding: 10,
                 marginTop: 30,

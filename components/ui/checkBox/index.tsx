@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 import { useAppTheme } from "@/context/theme-context";
 
-import View from "../view";
+import View from "@/components/view";
 import { IconChecklist } from "../icons/IconChecklist";
 
 export type CheckboxProps = {
@@ -28,7 +28,10 @@ export function Checkbox(props: CheckboxProps) {
         },
       ]}
     >
-      <IconChecklist size={8} color={selected ? "primary-50" : "line-stroke-30"} />
+      <IconChecklist
+        size={8}
+        color={selected ? "primary-500" : "line-stroke-30"}
+      />
     </View>
   );
 }

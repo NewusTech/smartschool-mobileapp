@@ -1,4 +1,4 @@
-import { Text, TextProps } from "react-native";
+import { TextProps } from "react-native";
 
 import { AppColorUnion } from "@/constants/Colors";
 import { useAppTheme } from "@/context/theme-context";
@@ -60,7 +60,7 @@ export const appFonts = {
 export function Typography(props: TypographyProps) {
   const {
     children,
-    color = "textprimary",
+    color = "text-default",
     fontFamily = "Poppins-Regular",
     fontSize = 14,
     style,

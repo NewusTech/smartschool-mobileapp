@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import {
   IconCaretLeft,
   IconCaretRight,
@@ -8,6 +7,7 @@ import {
 import { Typography } from "@/components/ui/typography";
 import View from "@/components/view";
 import { useAppTheme } from "@/context/theme-context";
+import { useIsFocused } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
@@ -23,7 +23,6 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
-import { useIsFocused } from "@react-navigation/native";
 
 type dummyProps = {
   id: number;
@@ -166,7 +165,7 @@ export default function Index() {
           <TouchableOpacity
             style={[
               styles.buttonChevron,
-              { backgroundColor: Colors["primary-50"] },
+              { backgroundColor: Colors["primary-500"] },
             ]}
             onPress={handlePrev}
           >
@@ -191,7 +190,7 @@ export default function Index() {
                 {activePage === index ? (
                   <IconDotActive />
                 ) : (
-                  <IconDotInActive color="primary-30" />
+                  <IconDotInActive color="primary-300" />
                 )}
               </TouchableOpacity>
             </Animated.View>
@@ -201,7 +200,7 @@ export default function Index() {
           <TouchableOpacity
             style={[
               styles.buttonChevron,
-              { backgroundColor: Colors["primary-50"] },
+              { backgroundColor: Colors["primary-500"] },
             ]}
             onPress={hanldeNext}
           >
