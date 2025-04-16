@@ -9,6 +9,7 @@ export type PostLoginPayload = z.infer<typeof postLoginPayloadSchema>;
 export const postRegisterPayloadSchema = z.object({
   email: z.string({ message: "Harus diisi" }).email("Email tidak valid"),
   name: z.string({ message: "Harus diisi" }),
+  nisn: z.string({ message: "Harus diisi" }),
   password: z.string({ message: "Harus diisi" }),
 });
 

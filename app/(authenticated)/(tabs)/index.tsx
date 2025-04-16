@@ -1,17 +1,17 @@
-import { Image, StyleSheet, Platform } from "react-native";
+import { Image, Platform, StyleSheet } from "react-native";
 
 import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import { handleLogoutSession } from "@/services/auth.service";
 import { Button } from "@/components/ui/button";
+import { handleLogoutSession } from "@/services/auth.service";
 import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
   const router = useRouter();
   const handleLogout = () => {
-    router.replace("/onboard");
+    router.replace("/auth/login");
     handleLogoutSession();
   };
 

@@ -1,10 +1,10 @@
 import View from "@/components/view";
+import { useAppTheme } from "@/context/theme-context";
 import React from "react";
 import { Modal, TouchableOpacity } from "react-native";
-import { Typography } from "../typography";
-import { useAppTheme } from "@/context/theme-context";
-import Loader from "../loader";
 import Animated, { SlideInDown } from "react-native-reanimated";
+import Loader from "../loader";
+import { Typography } from "../typography";
 
 type ModalAction = {
   visible: boolean;
@@ -66,7 +66,7 @@ export default function ModalAction({
             <TouchableOpacity
               style={{
                 width: "50%",
-                backgroundColor: Colors["primary-50"],
+                backgroundColor: Colors["primary-500"],
                 borderRadius: 15,
                 padding: 10,
               }}

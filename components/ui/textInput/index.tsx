@@ -1,17 +1,17 @@
 import { ReactNode, useState } from "react";
 import {
-  StyleSheet,
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
+  StyleSheet,
   TouchableOpacity,
 } from "react-native";
 
 import { useAppTheme } from "@/context/theme-context";
 
+import { AppColorUnion } from "@/constants/Colors";
+import { IconEye, IconEyeSlice } from "../../icons";
 import View from "../../view";
 import { Typography } from "../typography";
-import { IconEye, IconEyeSlice } from "../../icons";
-import { AppColorUnion } from "@/constants/Colors";
 
 export type TextInputProps = {
   label?: string;
@@ -19,6 +19,7 @@ export type TextInputProps = {
   errorMessage?: string;
   borderRadius?: number;
   textAlignVertical?: "top" | "center";
+  iconBefore?: ReactNode;
   color?: AppColorUnion;
 } & RNTextInputProps;
 export default function TextInput(props: TextInputProps) {
@@ -32,6 +33,7 @@ export default function TextInput(props: TextInputProps) {
     borderRadius = 100,
     textAlignVertical = "center",
     color = "line-stroke-50",
+    iconBefore = undefined,
     ...rest
   } = props;
 
@@ -62,6 +64,8 @@ export default function TextInput(props: TextInputProps) {
           },
         ]}
       >
+        {iconBefore && <View style={{ marginRight: -8 }}>{iconBefore}</View>}
+
         <View style={{ flex: 1 }}>
           <RNTextInput
             placeholderTextColor={Colors["line-stroke-30"]}
@@ -79,9 +83,9 @@ export default function TextInput(props: TextInputProps) {
             <TouchableOpacity onPress={() => setHidePassword(!hidePassword)}>
               <View>
                 {hidePassword ? (
-                  <IconEye color="primary-50" />
+                  <IconEye color="text-default" />
                 ) : (
-                  <IconEyeSlice color="primary-50" />
+                  <IconEyeSlice color="text-default" />
                 )}
               </View>
             </TouchableOpacity>
@@ -103,7 +107,6 @@ const styles = StyleSheet.create({
   },
   inputWrapper: {
     borderWidth: 1,
-    paddingVertical: 10,
     paddingHorizontal: 12,
     gap: 10,
     flexDirection: "row",

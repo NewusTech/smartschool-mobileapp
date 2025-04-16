@@ -8,7 +8,7 @@ import { IconProps } from "./types";
 export function IconCaretRight({
   width = 24,
   height = 24,
-  color = "primary-50",
+  color = "primary-500",
   ...rest
 }: IconProps) {
   const { Colors } = useAppTheme();

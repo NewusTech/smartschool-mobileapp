@@ -55,7 +55,7 @@ export default function final() {
           <Button
             style={{ marginTop: 10 }}
             variant="secondary"
-            textColor="primary-50"
+            textColor="primary-500"
             onPress={() => router.push("/auth/login")}
           >
             Masuk

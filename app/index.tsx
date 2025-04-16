@@ -1,11 +1,11 @@
-import { useEffect } from "react";
-import { Image, StyleSheet } from "react-native";
-import { useRouter } from "expo-router";
+import { Typography } from "@/components/ui/typography";
 import View from "@/components/view";
 import { getItem } from "@/lib/async-storage";
-import Animated, { Easing, SlideInDown } from "react-native-reanimated";
-import { Typography } from "@/components/ui/typography";
 import { useAuthActions } from "@/store/userStore";
+import { useRouter } from "expo-router";
+import { useEffect } from "react";
+import { Image, StyleSheet } from "react-native";
+import Animated, { Easing, SlideInDown } from "react-native-reanimated";
 
 const duration = 2000;
 const easing = Easing.bezier(0.25, -0.5, 0.25, 1);
@@ -23,7 +23,7 @@ export default function InitialScreen() {
         setAccessToken(storageAccessToken);
         router.replace("/(authenticated)/(tabs)");
       } else {
-        router.replace("/onboard");
+        router.replace("/auth/login");
       }
     };
 
@@ -41,7 +41,7 @@ export default function InitialScreen() {
       </Animated.View>
       <Typography
         fontFamily="Poppins-Bold"
-        color="primary-50"
+        color="primary-500"
         fontSize={24}
         style={{ marginVertical: 10 }}
       >

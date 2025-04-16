@@ -5,19 +5,19 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
 import "react-native-reanimated";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { appFonts, Typography } from "@/components/ui/typography";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "@/lib/transtack-query";
-import { AppThemeProvider } from "@/context/theme-context";
-import Toast from "react-native-toast-message";
 import CustomSplashScreen from "@/components/customSplashScreen";
+import { appFonts, Typography } from "@/components/ui/typography";
+import View from "@/components/view";
+import { AppThemeProvider } from "@/context/theme-context";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { queryClient } from "@/lib/transtack-query";
+import { useNetInfo } from "@react-native-community/netinfo";
+import { QueryClientProvider } from "@tanstack/react-query";
+import LottieView from "lottie-react-native";
 import React from "react";
 import { Modal } from "react-native";
-import View from "@/components/view";
 import Animated, { SlideInDown } from "react-native-reanimated";
-import { useNetInfo } from "@react-native-community/netinfo";
-import LottieView from "lottie-react-native";
+import Toast from "react-native-toast-message";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -58,10 +58,9 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-
   const { isConnected } = useNetInfo();
 
-  const [animationCompleted, setAnimationComplete] = useState<Boolean>(true);// false for enable animation
+  const [animationCompleted, setAnimationComplete] = useState<Boolean>(true); // false for enable animation
 
   const changeAnimationStatus = (param: Boolean) => {
     setAnimationComplete(param);
