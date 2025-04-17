@@ -382,7 +382,7 @@ export default function ProfileScreen() {
         onAction={handleLogout}
         onNegativeAction={() => setIsLogout(!isLogout)}
         isLoading={isLoading}
-        title="Keluar dari Smart School"
+        title="Keluar dari Smart School?"
       />
     ),
     [isLogout, handleLogout, isLoading],

@@ -2,6 +2,7 @@ import View from '@/components/view';
 import React, { useEffect, useRef } from 'react';
 import { Animated, Image, Modal } from 'react-native';
 
+import { ThemedText } from '@/components/ThemedText';
 import { Button } from '../button';
 import Loader from '../loader';
 import { Typography } from '../typography';
@@ -19,7 +20,7 @@ export default function ModalAction({
   onAction,
   onNegativeAction,
   isLoading = false,
-  title = 'Keluar dari Smartschool?',
+  title = '',
 }: ModalAction) {
   const translateY = useRef(new Animated.Value(300)).current;
   const opacity = useRef(new Animated.Value(0)).current;
@@ -76,14 +77,9 @@ export default function ModalAction({
               alignSelf: 'center',
             }}
           />
-          <Typography
-            fontFamily="Poppins-SemiBold"
-            fontSize={16}
-            color="black"
-            style={{ textAlign: 'center' }}
-          >
+          <ThemedText type="defaultSemiBold" style={{ textAlign: 'center' }}>
             {title}
-          </Typography>
+          </ThemedText>
 
           <View
             style={{
