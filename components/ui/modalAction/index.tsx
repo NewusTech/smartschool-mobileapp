@@ -1,14 +1,13 @@
-import View from "@/components/view";
-import { useAppTheme } from "@/context/theme-context";
-import React from "react";
-import { Modal, TouchableOpacity } from "react-native";
-import Animated, { SlideInDown } from "react-native-reanimated";
-import Loader from "../loader";
-import { Typography } from "../typography";
+import View from '@/components/view';
+import React, { useEffect, useRef } from 'react';
+import { Animated, Image, Modal } from 'react-native';
+
+import { Button } from '../button';
+import Loader from '../loader';
+import { Typography } from '../typography';
 
 type ModalAction = {
   visible: boolean;
-  setVisible: (visible: boolean) => void;
   onAction: () => void;
   isLoading: boolean;
   title?: string;
@@ -17,92 +16,103 @@ type ModalAction = {
 
 export default function ModalAction({
   visible,
-  setVisible,
   onAction,
   onNegativeAction,
   isLoading = false,
-  title = " Yakin Ingin Menghapus Data Ini?",
+  title = 'Keluar dari Smartschool?',
 }: ModalAction) {
-  const { Colors } = useAppTheme();
+  const translateY = useRef(new Animated.Value(300)).current;
+  const opacity = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    if (visible) {
+      Animated.parallel([
+        Animated.timing(translateY, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacity, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [opacity, translateY, visible]);
+
   return (
-    <Modal visible={visible} transparent={true} animationType="fade">
+    <Modal visible={visible} transparent animationType="fade">
       <View
         style={{
           flex: 1,
-          width: "100%",
-          height: "100%",
-          backgroundColor: "rgba(20, 21, 17, 0.5)",
-          justifyContent: "center",
-          alignItems: "center",
+          justifyContent: 'center',
+          alignItems: 'center',
+          backgroundColor: 'rgba(0,0,0,0.5)',
+          width: '100%',
+          height: '100%',
+          zIndex: 90,
         }}
       >
         <Animated.View
-          entering={SlideInDown}
           style={{
-            width: "80%",
-            height: "auto",
-            padding: 20,
-            borderRadius: 15,
-            justifyContent: "center",
+            transform: [{ translateY }],
+            opacity,
+            paddingVertical: 30,
+            paddingHorizontal: 20,
+            borderRadius: 20,
+            backgroundColor: 'white',
+            alignItems: 'center',
             gap: 20,
-            backgroundColor: Colors.white,
+            margin: 'auto',
+            width: '80%',
           }}
         >
+          <Image
+            source={require('../../../assets/images/question.png')}
+            style={{
+              width: 60,
+              height: 60,
+              alignSelf: 'center',
+            }}
+          />
           <Typography
-            fontFamily="Poppins-Medium"
+            fontFamily="Poppins-SemiBold"
             fontSize={16}
-            style={{ textAlign: "center" }}
+            color="black"
+            style={{ textAlign: 'center' }}
           >
             {title}
           </Typography>
+
           <View
             style={{
-              flexDirection: "row",
-              gap: 10,
-              width: "100%",
-              justifyContent: "center",
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              gap: 12,
             }}
           >
-            <TouchableOpacity
-              style={{
-                width: "50%",
-                backgroundColor: Colors["primary-500"],
-                borderRadius: 15,
-                padding: 10,
-              }}
-              disabled={isLoading}
-              onPress={onAction}
-            >
-              <Typography
-                fontFamily="Poppins-Medium"
-                fontSize={16}
-                color="white"
-                style={{ textAlign: "center" }}
-              >
-                {isLoading ? <Loader color="white" size={24} /> : "Ya!"}
-              </Typography>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                width: "50%",
-                backgroundColor: Colors["error-60"],
-                borderRadius: 15,
-                padding: 10,
-              }}
-              onPress={() => {
-                !onNegativeAction;
-                setVisible(false);
-              }}
-            >
-              <Typography
-                fontFamily="Poppins-Medium"
-                fontSize={16}
-                color="white"
-                style={{ textAlign: "center" }}
-              >
-                Tidak
-              </Typography>
-            </TouchableOpacity>
+            <View style={{ width: '50%' }}>
+              <Button variant="outlined" onPress={onNegativeAction}>
+                Batal
+              </Button>
+            </View>
+
+            <View style={{ width: '50%' }}>
+              <Button onPress={onAction}>
+                {isLoading ? (
+                  <Loader color="white" size={24} />
+                ) : (
+                  <Typography
+                    fontFamily="Poppins-Medium"
+                    fontSize={14}
+                    color="white"
+                  >
+                    Ya
+                  </Typography>
+                )}
+              </Button>
+            </View>
           </View>
         </Animated.View>
       </View>

@@ -1,32 +1,32 @@
-import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
-import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import { useEffect, useState } from "react";
-import "react-native-reanimated";
+import { DefaultTheme, ThemeProvider } from '@react-navigation/native';
+import { useFonts } from 'expo-font';
+import { Stack } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
+import { useEffect, useState } from 'react';
+import 'react-native-reanimated';
 
-import CustomSplashScreen from "@/components/customSplashScreen";
-import { appFonts, Typography } from "@/components/ui/typography";
-import View from "@/components/view";
-import { AppThemeProvider } from "@/context/theme-context";
-import { useColorScheme } from "@/hooks/useColorScheme";
-import { queryClient } from "@/lib/transtack-query";
-import { useNetInfo } from "@react-native-community/netinfo";
-import { QueryClientProvider } from "@tanstack/react-query";
-import LottieView from "lottie-react-native";
-import React from "react";
-import { Modal } from "react-native";
-import Animated, { SlideInDown } from "react-native-reanimated";
-import Toast from "react-native-toast-message";
+import CustomSplashScreen from '@/components/customSplashScreen';
+import { appFonts, Typography } from '@/components/ui/typography';
+import View from '@/components/view';
+import { AppThemeProvider } from '@/context/theme-context';
+import { useColorScheme } from '@/hooks/useColorScheme';
+import { queryClient } from '@/lib/transtack-query';
+import { useNetInfo } from '@react-native-community/netinfo';
+import { QueryClientProvider } from '@tanstack/react-query';
+import LottieView from 'lottie-react-native';
+import React from 'react';
+import { Modal } from 'react-native';
+import Animated, { SlideInDown } from 'react-native-reanimated';
+import Toast from 'react-native-toast-message';
 
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
-} from "expo-router";
+} from 'expo-router';
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: "index",
+  initialRouteName: 'index',
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -35,7 +35,7 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     ...appFonts,
-    SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
+    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
@@ -60,9 +60,9 @@ function RootLayoutNav() {
   const colorScheme = useColorScheme();
   const { isConnected } = useNetInfo();
 
-  const [animationCompleted, setAnimationComplete] = useState<Boolean>(true); // false for enable animation
+  const [animationCompleted, setAnimationComplete] = useState<boolean>(true); // false for enable animation
 
-  const changeAnimationStatus = (param: Boolean) => {
+  const changeAnimationStatus = (param: boolean) => {
     setAnimationComplete(param);
   };
 
@@ -71,13 +71,13 @@ function RootLayoutNav() {
       {animationCompleted && (
         <QueryClientProvider client={queryClient}>
           <ThemeProvider
-            value={colorScheme === "dark" ? DefaultTheme : DefaultTheme}
+            value={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}
           >
             <AppThemeProvider>
               <Stack
                 screenOptions={{
                   headerShown: false,
-                  animation: "ios_from_right",
+                  animation: 'ios_from_right',
                 }}
               />
               <Toast />
@@ -89,35 +89,35 @@ function RootLayoutNav() {
                 <View
                   style={{
                     flex: 1,
-                    width: "100%",
-                    height: "100%",
-                    backgroundColor: "rgba(20, 21, 17, 0.5)",
-                    justifyContent: "center",
-                    alignItems: "center",
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: 'rgba(20, 21, 17, 0.5)',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                   }}
                 >
                   <Animated.View
                     entering={SlideInDown}
                     style={{
-                      width: "70%",
-                      height: "auto",
+                      width: '70%',
+                      height: 'auto',
                       padding: 20,
                       borderRadius: 15,
-                      justifyContent: "center",
+                      justifyContent: 'center',
                       gap: 20,
-                      backgroundColor: "white",
+                      backgroundColor: 'white',
                     }}
                   >
                     <LottieView
-                      source={require("@/assets/lottie/Animated-Connection.json")}
-                      style={{ width: "100%", height: 200 }}
+                      source={require('@/assets/lottie/Animated-Connection.json')}
+                      style={{ width: '100%', height: 200 }}
                       autoPlay
                       loop={true}
                     />
                     <Typography
                       fontFamily="Poppins-Medium"
                       fontSize={16}
-                      style={{ textAlign: "center" }}
+                      style={{ textAlign: 'center' }}
                     >
                       Tidak terhubung ke internet
                     </Typography>
