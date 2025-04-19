@@ -28,6 +28,8 @@ import {
 } from "@expo-google-fonts/poppins";
 import Animated from "react-native-reanimated";
 
+import React from "react";
+
 export type TypographyProps = {
   fontFamily?: keyof typeof appFonts;
   color?: AppColorUnion;

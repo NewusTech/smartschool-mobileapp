@@ -1,24 +1,24 @@
-import EmailIcon from "@/components/icons/IconEmail";
-import IconIDCard from "@/components/icons/IconIDCard";
-import IconLock from "@/components/icons/IconLock";
-import IconUser from "@/components/icons/IconUser";
-import { Button } from "@/components/ui/button";
-import Loader from "@/components/ui/loader";
-import SafeAreaView from "@/components/ui/safeAreaView";
-import TextInput from "@/components/ui/textInput";
-import { Typography } from "@/components/ui/typography";
-import View from "@/components/view";
-import { useAuthRegister } from "@/services/user/api";
+import EmailIcon from '@/components/icons/IconEmail';
+import IconIDCard from '@/components/icons/IconIDCard';
+import IconLock from '@/components/icons/IconLock';
+import IconUser from '@/components/icons/IconUser';
+import { Button } from '@/components/ui/button';
+import Loader from '@/components/ui/loader';
+import SafeAreaView from '@/components/ui/safeAreaView';
+import TextInput from '@/components/ui/textInput';
+import { Typography } from '@/components/ui/typography';
+import View from '@/components/view';
+import { useAuthRegister } from '@/services/user/api';
 import {
   PostRegisterPayload,
   postRegisterPayloadSchema,
-} from "@/services/user/validation";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "expo-router";
-import { Controller, useForm } from "react-hook-form";
-import { Image, ImageBackground, StyleSheet } from "react-native";
+} from '@/services/user/validation';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'expo-router';
+import { Controller, useForm } from 'react-hook-form';
+import { Image, ImageBackground, StyleSheet } from 'react-native';
 
-import Toast from "react-native-toast-message";
+import Toast from 'react-native-toast-message';
 
 export default function Register() {
   const router = useRouter();
@@ -27,50 +27,50 @@ export default function Register() {
 
   const { control, formState, handleSubmit } = useForm<PostRegisterPayload>({
     resolver: zodResolver(postRegisterPayloadSchema),
-    mode: "all",
+    mode: 'all',
   });
 
   const handleRegister = handleSubmit((payload) => {
     registerMutation.mutate(payload, {
-      onSuccess: (response) => {
+      onSuccess: () => {
         Toast.show({
-          type: "success",
-          text1: "Register berhasil!",
-          text2: "Silahkan login dengan akun yg terdaftar",
+          type: 'success',
+          text1: 'Register berhasil!',
+          text2: 'Silahkan login dengan akun yg terdaftar',
         });
 
-        router.replace("/auth/login");
+        router.replace('/auth/login');
       },
-      onError: (error: any) => {
+      onError: (error) => {
         const serverErrorString = error.response?.data?.message;
         Toast.show({
-          type: "error",
-          text1: "Registarasi gagal",
-          text2: typeof serverErrorString === "string" ? serverErrorString : "",
+          type: 'error',
+          text1: 'Registarasi gagal',
+          text2: typeof serverErrorString === 'string' ? serverErrorString : '',
         });
       },
     });
   });
 
-  const handleToLogin = () => router.push("/auth/login");
+  const handleToLogin = () => router.push('/auth/login');
 
   return (
     <ImageBackground
-      source={require("../../../assets/images/background.png")}
+      source={require('../../../assets/images/background.png')}
       resizeMode="cover"
       style={style.container}
     >
       <SafeAreaView style={style.container}>
         <View backgroundColor="white" style={style.card}>
           <Image
-            source={require("../../../assets/images/logo.png")}
+            source={require('../../../assets/images/logo.png')}
             style={style.logo}
           />
           <Typography
             fontSize={16}
             fontFamily="Poppins-Bold"
             color="primary-500"
-            style={{ textAlign: "center", marginTop: 20 }}
+            style={{ textAlign: 'center', marginTop: 20 }}
           >
             Daftar Sebagai
           </Typography>
@@ -149,13 +149,13 @@ export default function Register() {
             disabled={!formState.isValid || registerMutation.isPending}
             onPress={handleRegister}
           >
-            {registerMutation.isPending ? <Loader color="white" /> : "Daftar"}
+            {registerMutation.isPending ? <Loader color="white" /> : 'Daftar'}
           </Button>
           <View
             style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "center",
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
               marginTop: 5,
             }}
           >
@@ -182,10 +182,10 @@ export default function Register() {
             textColor="black"
             color="line"
             disabled={!formState.isValid || registerMutation.isPending}
-            onPress={() => router.push("/auth/login")}
+            onPress={() => router.push('/auth/login')}
             iconBefore={
               <Image
-                source={require("../../../assets/images/google.png")}
+                source={require('../../../assets/images/google.png')}
                 style={style.logoGoogle}
               />
             }
@@ -201,21 +201,21 @@ export default function Register() {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    position: "relative",
+    position: 'relative',
   },
   card: {
     borderRadius: 20,
     paddingHorizontal: 20,
-    flexDirection: "column",
+    flexDirection: 'column',
     gap: 15,
     paddingVertical: 30,
-    marginVertical: "auto",
+    marginVertical: 'auto',
     marginHorizontal: 20,
   },
   logo: {
     width: 153,
     height: 48,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   marginTop10: {
     marginTop: 10,

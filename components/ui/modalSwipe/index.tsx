@@ -1,4 +1,5 @@
-import React from "react";
+import { AntDesign } from '@expo/vector-icons';
+import React from 'react';
 import {
   Animated,
   Modal,
@@ -6,16 +7,18 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-} from "react-native";
+} from 'react-native';
+import { Typography } from '../typography';
 
 type ModalSwipeProp = {
   children: React.ReactNode;
   setModalVisible: (value: boolean) => void;
   modalVisible: boolean;
+  title?: string;
 };
 
 export default function ModalSwipe(props: ModalSwipeProp) {
-  const { children, setModalVisible, modalVisible } = props;
+  const { children, setModalVisible, modalVisible, title = '' } = props;
 
   const pan = new Animated.ValueXY();
   const panResponder = PanResponder.create({
@@ -65,12 +68,23 @@ export default function ModalSwipe(props: ModalSwipeProp) {
           style={[styles.modalContent, { transform: [{ translateY: pan.y }] }]}
           {...panResponder.panHandlers}
         >
-          <TouchableOpacity
-            style={{ position: "relative", top: 0 }}
-            onPress={() => setModalVisible(false)}
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
           >
-            <View style={styles.modalHandle} />
-          </TouchableOpacity>
+            <Typography fontFamily="Poppins-Bold" fontSize={18}>
+              {title}
+            </Typography>
+            <TouchableOpacity
+              style={{ position: 'relative' }}
+              onPress={() => setModalVisible(false)}
+            >
+              <AntDesign name="close" size={24} color="black" />
+            </TouchableOpacity>
+          </View>
           <View style={{ paddingVertical: 10 }}>{children}</View>
         </Animated.View>
       </View>
@@ -81,32 +95,16 @@ export default function ModalSwipe(props: ModalSwipeProp) {
 const styles = StyleSheet.create({
   modalOverlay: {
     flex: 1,
-    justifyContent: "flex-end",
-    backgroundColor: "rgba(20, 21, 17, 0.5)",
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(20, 21, 17, 0.5)',
   },
   modalContent: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     padding: 20,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     minHeight: 200,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  modalHandle: {
-    width: "35%",
-    height: 3,
-    backgroundColor: "#4B4040",
-    borderRadius: 2.5,
-    alignSelf: "center",
-    marginBottom: 10,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,

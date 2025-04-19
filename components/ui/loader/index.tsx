@@ -1,5 +1,6 @@
 import { AppColorUnion } from "@/constants/Colors";
 import { useAppTheme } from "@/context/theme-context";
+import React from "react";
 import { ActivityIndicator } from "react-native";
 
 export type LoaderProp = {

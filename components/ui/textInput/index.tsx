@@ -8,10 +8,12 @@ import {
 
 import { useAppTheme } from "@/context/theme-context";
 
+import View from "@/components/view";
 import { AppColorUnion } from "@/constants/Colors";
 import { IconEye, IconEyeSlice } from "../../icons";
-import View from "../../view";
 import { Typography } from "../typography";
+
+import React from "react";
 
 export type TextInputProps = {
   label?: string;
