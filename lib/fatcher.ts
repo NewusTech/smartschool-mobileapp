@@ -1,17 +1,17 @@
-import { API_URL } from "@/constants";
-import { handleLogoutSession } from "@/services/auth.service";
-import { getAccessToken } from "@/store/userStore";
+import { API_URL } from '@/constants';
+import { handleLogoutSession } from '@/services/auth.service';
+import { getAccessToken } from '@/store/userStore';
 import axios, {
   AxiosError,
   AxiosResponse,
   InternalAxiosRequestConfig,
-} from "axios";
+} from 'axios';
 
 const apiClient = axios.create({
   baseURL: API_URL,
 });
 
-const requestInterceptor = (config: InternalAxiosRequestConfig<any>) => {
+const requestInterceptor = (config: InternalAxiosRequestConfig<unknown>) => {
   const accessToken = getAccessToken();
 
   config.headers.Authorization = `Bearer ${accessToken}`;
@@ -21,7 +21,7 @@ const requestInterceptor = (config: InternalAxiosRequestConfig<any>) => {
 
 const responseInterceptorSuccess = (response: AxiosResponse) => {
   console.log(response.config.url, {
-    type: "api success",
+    type: 'api success',
     data: response.data,
   });
   return response;
@@ -42,7 +42,7 @@ const responseInterceptorError = (error: AxiosError) => {
 apiClient.interceptors.request.use(requestInterceptor);
 apiClient.interceptors.response.use(
   responseInterceptorSuccess,
-  responseInterceptorError
+  responseInterceptorError,
 );
 
 export default apiClient;

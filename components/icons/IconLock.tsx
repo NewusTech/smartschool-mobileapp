@@ -1,12 +1,12 @@
-import { useAppTheme } from "@/context/theme-context";
-import React from "react";
-import Svg, { Circle, Path, Rect } from "react-native-svg";
-import { IconProps } from "./types";
+import { useAppTheme } from '@/context/theme-context';
+import React from 'react';
+import Svg, { Circle, Path, Rect } from 'react-native-svg';
+import { IconProps } from './types';
 
 const IconLock = ({
   width = 24,
   height = 24,
-  color = "text-default",
+  color = 'text-default',
   ...rest
 }: IconProps) => {
   const { Colors } = useAppTheme();
@@ -20,6 +20,7 @@ const IconLock = ({
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
+      {...rest}
     >
       <Circle cx="12" cy="16" r="1" />
       <Rect x="3" y="10" width="18" height="12" rx="2" />

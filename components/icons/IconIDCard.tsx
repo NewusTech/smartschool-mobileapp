@@ -1,12 +1,12 @@
-import { useAppTheme } from "@/context/theme-context";
-import React from "react";
-import Svg, { Circle, Path, Rect } from "react-native-svg";
-import { IconProps } from "./types";
+import { useAppTheme } from '@/context/theme-context';
+import React from 'react';
+import Svg, { Circle, Path, Rect } from 'react-native-svg';
+import { IconProps } from './types';
 
 const IconIDCard = ({
   width = 24,
   height = 24,
-  color = "text-default",
+  color = 'text-default',
   ...rest
 }: IconProps) => {
   const { Colors } = useAppTheme();
@@ -21,6 +21,7 @@ const IconIDCard = ({
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
+      {...rest}
     >
       <Path d="M16 10h2" />
       <Path d="M16 14h2" />

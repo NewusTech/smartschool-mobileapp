@@ -1,8 +1,8 @@
-import { useStore } from "zustand";
-import { createStore } from "zustand/vanilla";
+import { useStore } from 'zustand';
+import { createStore } from 'zustand/vanilla';
 
-import { ExtractState } from "@/lib/zustand";
-import { userProfileResponseSuccess } from "@/services/user/interface";
+import { ExtractState } from '@/lib/zustand';
+import { userProfileResponseSuccess } from '@/services/user/interface';
 
 type AuthStore = {
   accessToken: string | null;
@@ -15,7 +15,7 @@ type AuthStore = {
   };
 };
 
-const authStore = createStore<AuthStore>()((set, get) => ({
+const authStore = createStore<AuthStore>()((set) => ({
   accessToken: null,
   profile: null,
   savedVacancy: [],

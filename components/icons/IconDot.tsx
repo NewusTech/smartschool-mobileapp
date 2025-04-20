@@ -1,14 +1,14 @@
-import * as React from "react";
-import Svg, { Path } from "react-native-svg";
+import * as React from 'react';
+import Svg, { Path } from 'react-native-svg';
 
-import { useAppTheme } from "@/context/theme-context";
+import { useAppTheme } from '@/context/theme-context';
 
-import { IconProps } from "./types";
+import { IconProps } from './types';
 
 export function IconDot({
   width = 24,
   height = 24,
-  color = "primary-500",
+  color = 'primary-500',
   ...rest
 }: IconProps) {
   const { Colors } = useAppTheme();
