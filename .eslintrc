@@ -30,11 +30,12 @@
     "no-param-reassign": "off",
     "no-throw-literal": "off",
     "no-bitwise": "off",
+    "no-unescaped-entities": "off",
     "@typescript-eslint/no-throw-literal": "off",
     "@typescript-eslint/no-require-imports": [
       "error",
       {
-        "allow": ["\\.(png|jpg|jpeg|gif|svg)$"],
+        "allow": ["\\.(png|jpg|jpeg|gif|svg|json|ttf)$"],
       },
     ],
   },

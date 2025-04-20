@@ -1,13 +1,13 @@
-import { Button } from "@/components/ui/button";
-import { Typography } from "@/components/ui/typography";
-import View from "@/components/view";
-import { useAppTheme } from "@/context/theme-context";
-import { useRouter } from "expo-router";
-import React from "react";
-import { Dimensions, Image, SafeAreaView } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Button } from '@/components/ui/button';
+import { Typography } from '@/components/ui/typography';
+import View from '@/components/view';
+import { useAppTheme } from '@/context/theme-context';
+import { useRouter } from 'expo-router';
+import React from 'react';
+import { Dimensions, Image, SafeAreaView } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-export default function final() {
+export default function Final() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const { Colors } = useAppTheme();
@@ -16,30 +16,30 @@ export default function final() {
     <SafeAreaView style={{ backgroundColor: Colors.white, flex: 1 }}>
       <View
         style={{
-          width: Dimensions.get("window").width,
+          width: Dimensions.get('window').width,
           height: 300,
-          overflow: "hidden",
-          alignItems: "center",
-          justifyContent: "center",
+          overflow: 'hidden',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
         <Image
-          source={require("@/assets/images/no-image.png")}
-          style={{ width: "100%", resizeMode: "center" }}
+          source={require('@/assets/images/no-image.png')}
+          style={{ width: '100%', resizeMode: 'center' }}
         />
       </View>
       <View style={{ paddingHorizontal: insets.left + 10 }}>
         <Typography
           fontFamily="Poppins-Medium"
           fontSize={22}
-          style={{ textAlign: "center" }}
+          style={{ textAlign: 'center' }}
         >
           Selamat Datang di Newus Technology
         </Typography>
         <Typography
           fontFamily="Poppins-Light"
           fontSize={15}
-          style={{ textAlign: "center" }}
+          style={{ textAlign: 'center' }}
         >
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos et
           consequuntur non veritatis esse corporis officia natus nobis velit,
@@ -48,7 +48,7 @@ export default function final() {
         <View style={{ marginHorizontal: 20 }}>
           <Button
             style={{ marginTop: 20 }}
-            onPress={() => router.push("/auth/register")}
+            onPress={() => router.push('/auth/register')}
           >
             Daftar
           </Button>
@@ -56,7 +56,7 @@ export default function final() {
             style={{ marginTop: 10 }}
             variant="secondary"
             textColor="primary-500"
-            onPress={() => router.push("/auth/login")}
+            onPress={() => router.push('/auth/login')}
           >
             Masuk
           </Button>
