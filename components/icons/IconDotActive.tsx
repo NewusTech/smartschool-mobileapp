@@ -1,20 +1,26 @@
-import * as React from "react";
-import Svg, { Circle, Rect } from "react-native-svg";
+import * as React from 'react';
+import Svg, { Circle, Rect } from 'react-native-svg';
 
-import { useAppTheme } from "@/context/theme-context";
+import { useAppTheme } from '@/context/theme-context';
 
-import { IconProps } from "./types";
+import { IconProps } from './types';
 
 export function IconDotActive({
   width = 24,
   height = 24,
-  color = "primary-500",
+  color = 'primary-500',
   ...rest
 }: IconProps) {
   const { Colors } = useAppTheme();
 
   return (
-    <Svg width={width} height={height} viewBox="0 0 25 24" fill="none">
+    <Svg
+      width={width}
+      height={height}
+      viewBox="0 0 25 24"
+      fill="none"
+      {...rest}
+    >
       <Rect
         x="1"
         y="0.5"

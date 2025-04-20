@@ -1,29 +1,29 @@
-import EmailIcon from "@/components/icons/IconEmail";
-import IconLock from "@/components/icons/IconLock";
-import { Button } from "@/components/ui/button";
-import Loader from "@/components/ui/loader";
-import SafeAreaView from "@/components/ui/safeAreaView";
-import TextInput from "@/components/ui/textInput";
-import TextLink from "@/components/ui/textLink";
-import { Typography } from "@/components/ui/typography";
-import View from "@/components/view";
-import { setItem } from "@/lib/async-storage";
-import { useAuthLogin } from "@/services/user/api";
+import EmailIcon from '@/components/icons/IconEmail';
+import IconLock from '@/components/icons/IconLock';
+import { Button } from '@/components/ui/button';
+import Loader from '@/components/ui/loader';
+import SafeAreaView from '@/components/ui/safeAreaView';
+import TextInput from '@/components/ui/textInput';
+import TextLink from '@/components/ui/textLink';
+import { Typography } from '@/components/ui/typography';
+import View from '@/components/view';
+import { setItem } from '@/lib/async-storage';
+import { useAuthLogin } from '@/services/user/api';
 import {
   PostLoginPayload,
   postLoginPayloadSchema,
-} from "@/services/user/validation";
-import { useAuthActions } from "@/store/userStore";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useNavigation, useRouter } from "expo-router";
-import React from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Image, ImageBackground, StyleSheet } from "react-native";
-import Toast from "react-native-toast-message";
+} from '@/services/user/validation';
+import { useAuthActions } from '@/store/userStore';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigation, useRouter } from 'expo-router';
+import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { Image, ImageBackground, StyleSheet } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 export default function Login() {
   const router = useRouter();
-  const navigation = useNavigation<any>();
+  const navigation = useNavigation();
 
   // store
   const { setAccessToken } = useAuthActions();
@@ -32,34 +32,34 @@ export default function Login() {
 
   const { control, handleSubmit, formState } = useForm<PostLoginPayload>({
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     resolver: zodResolver(postLoginPayloadSchema),
-    mode: "all",
+    mode: 'all',
   });
 
   // fake login
   const mockLogin = async () => {
     setAccessToken(
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30"
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30',
     );
     await setItem(
-      "accesstoken",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30"
+      'accesstoken',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30',
     );
     Toast.show({
-      type: "success",
-      text1: "Login berhasil!",
-      text2: "Selamat anda berhasil login",
+      type: 'success',
+      text1: 'Login berhasil!',
+      text2: 'Selamat anda berhasil login',
     });
     navigation.reset({
       index: 0,
-      routes: [{ name: "(authenticated)/(tabs)" }],
+      routes: [{ name: '(authenticated)/(tabs)' as never }],
     });
   };
 
-  const handleLoginMutation = handleSubmit((data) => {
+  const handleLoginMutation = handleSubmit(() => {
     // loginMutation.mutate(data, {
     //   onSuccess: async (response) => {
     //     setAccessToken(response.data.token);
@@ -88,27 +88,27 @@ export default function Login() {
 
   const handleLoginWithGoogle = () => {};
 
-  const handleToRegister = () => router.push("/auth/register");
+  const handleToRegister = () => router.push('/auth/register');
 
   const handleToForgotPassword = () => {};
 
   return (
     <ImageBackground
-      source={require("../../../assets/images/background.png")}
+      source={require('../../../assets/images/background.png')}
       resizeMode="cover"
       style={style.container}
     >
       <SafeAreaView style={style.container}>
         <View backgroundColor="white" style={style.card}>
           <Image
-            source={require("../../../assets/images/logo.png")}
+            source={require('../../../assets/images/logo.png')}
             style={style.logo}
           />
           <Typography
             fontSize={16}
             fontFamily="Poppins-Bold"
             color="primary-500"
-            style={{ textAlign: "center", marginTop: 20 }}
+            style={{ textAlign: 'center', marginTop: 20 }}
           >
             Masuk ke Akun Anda
           </Typography>
@@ -147,7 +147,7 @@ export default function Login() {
             )}
           />
 
-          <View style={{ alignItems: "flex-start" }}>
+          <View style={{ alignItems: 'flex-start' }}>
             <TextLink
               label="Lupa Password?"
               fontSize={15}
@@ -165,7 +165,7 @@ export default function Login() {
             disabled={!formState.isValid || loginMutation.isPending}
             onPress={handleLoginMutation}
           >
-            {loginMutation.isPending ? <Loader color="white" /> : "Masuk"}
+            {loginMutation.isPending ? <Loader color="white" /> : 'Masuk'}
           </Button>
           <View style={style.noAccount}>
             <Typography
@@ -195,7 +195,7 @@ export default function Login() {
             onPress={handleLoginWithGoogle}
             iconBefore={
               <Image
-                source={require("../../../assets/images/google.png")}
+                source={require('../../../assets/images/google.png')}
                 style={style.google}
               />
             }
@@ -211,21 +211,21 @@ export default function Login() {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    position: "relative",
+    position: 'relative',
   },
   card: {
     borderRadius: 20,
     paddingHorizontal: 20,
-    flexDirection: "column",
+    flexDirection: 'column',
     gap: 15,
     paddingVertical: 30,
-    marginVertical: "auto",
+    marginVertical: 'auto',
     marginHorizontal: 20,
   },
   logo: {
     width: 153,
     height: 48,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   google: {
     width: 18,
@@ -235,9 +235,9 @@ const style = StyleSheet.create({
     marginTop: 10,
   },
   noAccount: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: 5,
   },
 });

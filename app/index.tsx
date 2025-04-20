@@ -1,14 +1,11 @@
-import { Typography } from "@/components/ui/typography";
-import View from "@/components/view";
-import { getItem } from "@/lib/async-storage";
-import { useAuthActions } from "@/store/userStore";
-import { useRouter } from "expo-router";
-import { useEffect } from "react";
-import { Image, StyleSheet } from "react-native";
-import Animated, { Easing, SlideInDown } from "react-native-reanimated";
-
-const duration = 2000;
-const easing = Easing.bezier(0.25, -0.5, 0.25, 1);
+import { Typography } from '@/components/ui/typography';
+import View from '@/components/view';
+import { getItem } from '@/lib/async-storage';
+import { useAuthActions } from '@/store/userStore';
+import { useRouter } from 'expo-router';
+import React, { useEffect } from 'react';
+import { Image, StyleSheet } from 'react-native';
+import Animated, { SlideInDown } from 'react-native-reanimated';
 
 export default function InitialScreen() {
   const router = useRouter();
@@ -17,24 +14,24 @@ export default function InitialScreen() {
 
   useEffect(() => {
     const initAuth = async () => {
-      const storageAccessToken = await getItem("accesstoken");
+      const storageAccessToken = await getItem('accesstoken');
 
       if (storageAccessToken) {
         setAccessToken(storageAccessToken);
-        router.replace("/(authenticated)/(tabs)");
+        router.replace('/(authenticated)/(tabs)');
       } else {
-        router.replace("/auth/login");
+        router.replace('/onboard');
       }
     };
 
     initAuth();
-  }, [router]);
+  }, [router, setAccessToken]);
 
   return (
     <View style={style.container}>
       <Animated.View entering={SlideInDown.duration(1000)}>
         <Image
-          source={require("@/assets/images/logo.png")}
+          source={require('@/assets/images/logo.png')}
           // style={{ width: 480 }}
           resizeMode="contain"
         />
@@ -54,7 +51,7 @@ export default function InitialScreen() {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

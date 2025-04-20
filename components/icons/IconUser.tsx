@@ -1,12 +1,12 @@
-import { useAppTheme } from "@/context/theme-context";
-import React from "react";
-import Svg, { Circle, Path } from "react-native-svg";
-import { IconProps } from "./types";
+import { useAppTheme } from '@/context/theme-context';
+import React from 'react';
+import Svg, { Circle, Path } from 'react-native-svg';
+import { IconProps } from './types';
 
 const IconUser = ({
   width = 24,
   height = 24,
-  color = "text-default",
+  color = 'text-default',
   ...rest
 }: IconProps) => {
   const { Colors } = useAppTheme();
@@ -21,6 +21,7 @@ const IconUser = ({
       strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
+      {...rest}
     >
       <Circle cx="12" cy="8" r="5" />
       <Path d="M20 21a8 8 0 0 0-16 0" />

@@ -3,65 +3,65 @@ import {
   IconCaretRight,
   IconDotActive,
   IconDotInActive,
-} from "@/components/icons";
-import { Typography } from "@/components/ui/typography";
-import View from "@/components/view";
-import { useAppTheme } from "@/context/theme-context";
-import { useIsFocused } from "@react-navigation/native";
-import { useRouter } from "expo-router";
-import React, { useEffect, useRef, useState } from "react";
-import { Image, StyleSheet, TouchableOpacity } from "react-native";
-import PagerView from "react-native-pager-view";
+} from '@/components/icons';
+import { Typography } from '@/components/ui/typography';
+import View from '@/components/view';
+import { useAppTheme } from '@/context/theme-context';
+import { useIsFocused } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
+import React, { useEffect, useRef, useState } from 'react';
+import { Image, ImageProps, StyleSheet, TouchableOpacity } from 'react-native';
+import PagerView from 'react-native-pager-view';
 import Animated, {
   FadeIn,
   FadeOut,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
-} from "react-native-reanimated";
+} from 'react-native-reanimated';
 import {
   SafeAreaView,
   useSafeAreaInsets,
-} from "react-native-safe-area-context";
+} from 'react-native-safe-area-context';
 
 type dummyProps = {
   id: number;
-  image: any;
+  image: ImageProps;
   title: string;
   subTitle: string;
 };
 const dummy: dummyProps[] = [
   {
     id: 1,
-    image: require("@/assets/images/no-image.png"),
+    image: require('@/assets/images/no-image.png'),
     title:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, maiores?",
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, maiores?',
     subTitle:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam necessitatibus magni, nam numquam neque minima.",
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam necessitatibus magni, nam numquam neque minima.',
   },
   {
     id: 2,
-    image: require("@/assets/images/no-image.png"),
+    image: require('@/assets/images/no-image.png'),
     title:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, maiores?",
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, maiores?',
     subTitle:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam necessitatibus magni, nam numquam neque minima.",
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam necessitatibus magni, nam numquam neque minima.',
   },
   {
     id: 3,
-    image: require("@/assets/images/no-image.png"),
+    image: require('@/assets/images/no-image.png'),
     title:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, maiores?",
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, maiores?',
     subTitle:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam necessitatibus magni, nam numquam neque minima.",
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam necessitatibus magni, nam numquam neque minima.',
   },
   {
     id: 4,
-    image: require("@/assets/images/no-image.png"),
+    image: require('@/assets/images/no-image.png'),
     title:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, maiores?",
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, maiores?',
     subTitle:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam necessitatibus magni, nam numquam neque minima.",
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam necessitatibus magni, nam numquam neque minima.',
   },
 ];
 
@@ -83,7 +83,7 @@ export default function Index() {
     if (pagerRef.current && activePage < dummy.length - 1) {
       pagerRef.current.setPage(activePage + 1);
     } else if (activePage === dummy.length - 1) {
-      router.push("/onboard/final");
+      router.push('/onboard/final');
     }
   };
 
@@ -101,7 +101,7 @@ export default function Index() {
         translateX.value = 0;
       }
     }
-  }, [activePage, isFocused]);
+  }, [activePage, isFocused, translateX]);
   return (
     <SafeAreaView
       style={{
@@ -111,8 +111,8 @@ export default function Index() {
     >
       <View
         style={{
-          width: "100%",
-          height: "auto",
+          width: '100%',
+          height: 'auto',
           aspectRatio: 1 / 1,
           paddingHorizontal: 10,
         }}
@@ -128,27 +128,27 @@ export default function Index() {
               key={data.id}
               source={data.image}
               style={{
-                width: "100%",
-                height: "100%",
+                width: '100%',
+                height: '100%',
                 aspectRatio: 1 / 1,
-                resizeMode: "cover", // Gunakan 'cover', 'contain', atau 'stretch'
+                resizeMode: 'cover', // Gunakan 'cover', 'contain', atau 'stretch'
               }}
             />
           ))}
         </PagerView>
       </View>
-      <View style={{ marginTop: 20, display: "flex", gap: 5, height: 130 }}>
+      <View style={{ marginTop: 20, display: 'flex', gap: 5, height: 130 }}>
         <Typography
           fontFamily="Poppins-Medium"
           fontSize={19}
-          style={{ textAlign: "center" }}
+          style={{ textAlign: 'center' }}
         >
           {dummy[activePage].title}
         </Typography>
         <Typography
           fontFamily="Poppins-Light"
           fontSize={15}
-          style={{ textAlign: "center" }}
+          style={{ textAlign: 'center' }}
         >
           {dummy[activePage].subTitle}
         </Typography>
@@ -156,16 +156,16 @@ export default function Index() {
       <View
         style={{
           marginTop: 30,
-          display: "flex",
-          flexDirection: "row",
-          justifyContent: "center",
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'center',
         }}
       >
         <Animated.View style={[animatedStyles]}>
           <TouchableOpacity
             style={[
               styles.buttonChevron,
-              { backgroundColor: Colors["primary-500"] },
+              { backgroundColor: Colors['primary-500'] },
             ]}
             onPress={handlePrev}
           >
@@ -174,17 +174,17 @@ export default function Index() {
         </Animated.View>
         <View
           style={{
-            flexDirection: "row",
-            width: "70%",
-            alignItems: "center",
-            justifyContent: "center",
+            flexDirection: 'row',
+            width: '70%',
+            alignItems: 'center',
+            justifyContent: 'center',
             marginHorizontal: 10,
           }}
         >
           {dummy.map((_, index) => (
             <Animated.View key={index} entering={FadeIn} exiting={FadeOut}>
               <TouchableOpacity
-                style={[{ backgroundColor: Colors["transparent"] }]}
+                style={[{ backgroundColor: Colors['transparent'] }]}
                 onPress={() => pagerRef.current?.setPage(index)}
               >
                 {activePage === index ? (
@@ -200,7 +200,7 @@ export default function Index() {
           <TouchableOpacity
             style={[
               styles.buttonChevron,
-              { backgroundColor: Colors["primary-500"] },
+              { backgroundColor: Colors['primary-500'] },
             ]}
             onPress={hanldeNext}
           >
@@ -214,9 +214,9 @@ export default function Index() {
 
 const styles = StyleSheet.create({
   pagerView: {
-    width: "100%",
+    width: '100%',
     height: 360,
-    objectFit: "cover",
+    objectFit: 'cover',
   },
   buttonChevron: {
     borderRadius: 100,
