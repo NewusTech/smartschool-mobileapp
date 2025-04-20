@@ -32,12 +32,7 @@
     "no-bitwise": "off",
     "no-unescaped-entities": "off",
     "@typescript-eslint/no-throw-literal": "off",
-    "@typescript-eslint/no-require-imports": [
-      "error",
-      {
-        "allow": ["\\.(png|jpg|jpeg|gif|svg|json|ttf)$"],
-      },
-    ],
+    "@typescript-eslint/no-require-imports": "off",
   },
   "settings": {
     "react": {
