@@ -1,41 +1,43 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useState } from 'react';
 import {
   TextInput as RNTextInput,
   TextInputProps as RNTextInputProps,
   StyleSheet,
   TouchableOpacity,
-} from "react-native";
+} from 'react-native';
 
-import { useAppTheme } from "@/context/theme-context";
+import { useAppTheme } from '@/context/theme-context';
 
-import View from "@/components/view";
-import { AppColorUnion } from "@/constants/Colors";
-import { IconEye, IconEyeSlice } from "../../icons";
-import { Typography } from "../typography";
+import View from '@/components/view';
+import { AppColorUnion } from '@/constants/Colors';
+import { IconEye, IconEyeSlice } from '../../icons';
+import { Typography } from '../typography';
 
-import React from "react";
+import React from 'react';
 
 export type TextInputProps = {
   label?: string;
   trailingIcon?: ReactNode;
   errorMessage?: string;
   borderRadius?: number;
-  textAlignVertical?: "top" | "center";
+  textAlignVertical?: 'top' | 'center';
   iconBefore?: ReactNode;
   color?: AppColorUnion;
+  hintMessage?: string;
 } & RNTextInputProps;
 export default function TextInput(props: TextInputProps) {
   const {
-    label = "",
+    label = '',
     editable = true,
     style,
-    errorMessage = "",
+    errorMessage = '',
     secureTextEntry = false,
     trailingIcon,
     borderRadius = 100,
-    textAlignVertical = "center",
-    color = "line-stroke-50",
+    textAlignVertical = 'center',
+    color = 'line-stroke-50',
     iconBefore = undefined,
+    hintMessage = '',
     ...rest
   } = props;
 
@@ -52,16 +54,16 @@ export default function TextInput(props: TextInputProps) {
         </Typography>
       )}
       <View
-        backgroundColor={editable ? "transparent" : "line-stroke-20"}
+        backgroundColor={editable ? 'transparent' : 'line-stroke-20'}
         style={[
           styles.inputWrapper,
           {
             borderColor:
-              errorMessage.trim() !== ""
-                ? Colors["error-60"]
+              errorMessage.trim() !== ''
+                ? Colors['error-60']
                 : focused
-                ? Colors[color]
-                : Colors["line-stroke-30"],
+                  ? Colors[color]
+                  : Colors['line-stroke-30'],
             borderRadius,
           },
         ]}
@@ -70,9 +72,9 @@ export default function TextInput(props: TextInputProps) {
 
         <View style={{ flex: 1 }}>
           <RNTextInput
-            placeholderTextColor={Colors["line-stroke-30"]}
+            placeholderTextColor={Colors['line-stroke-30']}
             editable={editable}
-            style={[{ color: Colors["black-80"], textAlignVertical }, style]}
+            style={[{ color: Colors['black-80'], textAlignVertical }, style]}
             secureTextEntry={secureTextEntry && hidePassword}
             {...rest}
             onFocus={() => setFocused(true)}
@@ -94,11 +96,23 @@ export default function TextInput(props: TextInputProps) {
           ))}
       </View>
 
-      {!!errorMessage && (
-        <Typography fontFamily="Poppins-Light" fontSize={10} color="error-50">
-          {errorMessage}
-        </Typography>
-      )}
+      <View>
+        {!!errorMessage && (
+          <Typography fontFamily="Poppins-Light" fontSize={10} color="error-50">
+            {errorMessage}
+          </Typography>
+        )}
+        {!!hintMessage && (
+          <Typography
+            fontFamily="Poppins-Light"
+            fontSize={10}
+            color="text-secondary"
+            style={{ alignSelf: 'flex-end' }}
+          >
+            {hintMessage}
+          </Typography>
+        )}
+      </View>
     </View>
   );
 }
@@ -111,7 +125,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     paddingHorizontal: 12,
     gap: 10,
-    flexDirection: "row",
-    alignItems: "center",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
