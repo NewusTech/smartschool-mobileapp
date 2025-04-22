@@ -1,55 +1,45 @@
-import { ReactNode } from "react";
-import { Image, StyleSheet } from "react-native";
-import SelectDropdown from "react-native-select-dropdown";
+import { StyleSheet } from 'react-native';
+import SelectDropdown from 'react-native-select-dropdown';
 
-import { AppColorUnion } from "@/constants/Colors";
-import { useAppTheme } from "@/context/theme-context";
-import { IconMagnifyingGlass } from "../icons";
+import { AppColorUnion } from '@/constants/Colors';
+import { useAppTheme } from '@/context/theme-context';
 
-import View from "@/components/view";
-import { Typography } from "../typography";
+import View from '@/components/view';
+import { FontAwesome5 } from '@expo/vector-icons';
+import { memo, useMemo } from 'react';
+import { Typography } from '../typography';
 
 export type DataItem = {
-  title: string | number;
-  image?: string;
+  name: string;
+  value: string | number;
 };
-export type SelectInputProps = {
-  leadingIcon?: ReactNode;
-  trailingIcon?: ReactNode;
-  withBorder?: boolean;
+export type ISelectInputProps = {
   borderRadius?: number;
-  gap?: number;
-  padding?: number;
-  paddingHorizontal?: number;
   data: DataItem[];
   onSelect: (selectedItem: DataItem, index: number) => void;
   value: string | number;
   placeholder?: string;
-  suffix?: string;
   label?: string;
   disabled?: boolean;
   color?: AppColorUnion;
 };
-export function SelectInput(props: SelectInputProps) {
-  const {
-    leadingIcon,
-    trailingIcon,
-    value,
-    withBorder = true,
-    borderRadius = 10,
-    gap = 12,
-    padding = 8,
-    paddingHorizontal = padding,
-    data = [],
-    onSelect = () => {},
-    placeholder = "",
-    suffix = "",
-    label,
-    disabled = false,
-    color = "line-stroke-30",
-  } = props;
 
+const SelectInput = ({
+  value,
+  borderRadius = 6,
+  data = [],
+  onSelect,
+  placeholder = 'Pilih',
+  label,
+  disabled = false,
+  color = 'neutral-700',
+}: ISelectInputProps) => {
   const { Colors } = useAppTheme();
+
+  const selectedValue = useMemo(
+    () => data.find((item) => item.value === value),
+    [data, value],
+  );
 
   return (
     <SelectDropdown
@@ -59,97 +49,67 @@ export function SelectInput(props: SelectInputProps) {
       renderButton={(selected, isOpened) => (
         <View style={{ gap: 5 }}>
           {label && (
-            <Typography fontFamily="Poppins-Medium" fontSize={14}>
-              {label}
-            </Typography>
+            <Typography fontFamily="Poppins-Medium">{label}</Typography>
           )}
           <View
-            // backgroundColor={selected ? "line-stroke-30" : "white"}
             style={[
               styles.container,
               {
-                borderWidth: withBorder ? 1 : 0,
-                borderColor: isOpened ? Colors["primary-500"] : Colors[color],
-                padding: withBorder ? padding : 0,
-                paddingHorizontal,
+                borderColor: isOpened ? Colors['primary-500'] : Colors[color],
                 borderRadius,
-                gap,
                 backgroundColor: disabled
-                  ? Colors["line-stroke-20"]
-                  : "transparent",
+                  ? Colors['line-stroke-20']
+                  : 'transparent',
               },
             ]}
           >
-            {leadingIcon}
-            <Typography
-              fontSize={14}
-              color={value ? "black" : "black-50"}
-              style={styles.textInput}
-            >
-              {value || placeholder} {" " + suffix}
+            <Typography style={styles.textInput}>
+              {selectedValue?.name || placeholder}
             </Typography>
 
-            {trailingIcon}
+            <FontAwesome5 name={isOpened ? 'chevron-up' : 'chevron-down'} />
           </View>
         </View>
       )}
-      search
-      searchInputStyle={{
-        backgroundColor: Colors.white,
-        borderBottomWidth: 1,
-        borderBottomColor: "#FFFFFF",
-      }}
-      searchInputTxtColor={"#151E26"}
-      searchPlaceHolder={"Search here"}
-      searchPlaceHolderColor={"#72808D"}
-      renderSearchInputLeftIcon={() => {
-        return <IconMagnifyingGlass />;
-      }}
       renderItem={(item, index, isSelected) => {
         return (
           <View
             style={[
-              styles.dropdownItemStyle,
+              styles.dropdownItem,
               {
-                ...(isSelected && { backgroundColor: Colors["primary-500"] }),
+                ...(isSelected && { backgroundColor: Colors['neutral-100'] }),
               },
             ]}
           >
-            {item.image && (
-              <Image style={{ width: 18, height: 18 }} source={item.image} />
-            )}
-            <Typography color={isSelected ? "white" : "black-80"}>
-              {item.title} {suffix}
-            </Typography>
+            <Typography>{item.name}</Typography>
           </View>
         );
       }}
       dropdownStyle={{
         backgroundColor: Colors.white,
-        transform: [{ translateY: -20 }],
+        borderRadius: 8,
       }}
       dropdownOverlayColor="transparent"
     />
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    flexDirection: "row",
-    alignItems: "center",
+    width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    borderWidth: 1,
   },
   textInput: {
     flex: 1,
   },
-  dropdownItemStyle: {
+  dropdownItem: {
     padding: 8,
-    borderRadius: 0,
-    flexDirection: "row",
-    gap: 10,
-    alignItems: "center",
-  },
-  searchInput: {
-    height: 40,
+    paddingHorizontal: 12,
   },
 });
+
+export default memo(SelectInput);
