@@ -20,7 +20,7 @@ export default function InitialScreen() {
         setAccessToken(storageAccessToken);
         router.replace('/(authenticated)/(tabs)');
       } else {
-        router.replace('/onboard');
+        router.replace('/auth/login');
       }
     };
 
