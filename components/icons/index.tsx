@@ -16,4 +16,5 @@ export * from './IconHome';
 export * from './IconIDCard';
 export * from './IconLock';
 export * from './IconLogout';
+export * from './IconTimer';
 export * from './IconUser';
