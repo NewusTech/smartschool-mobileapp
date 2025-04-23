@@ -1,17 +1,17 @@
-import React, { ReactNode } from "react";
-import { Pressable, PressableProps, StyleSheet } from "react-native";
-import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
+import React, { ReactNode } from 'react';
+import { Pressable, PressableProps, StyleSheet } from 'react-native';
+import { ViewProps } from 'react-native-svg/lib/typescript/fabric/utils';
 
-import { useAppTheme } from "@/context/theme-context";
+import { useAppTheme } from '@/context/theme-context';
 
-import { AppColorUnion } from "@/constants/Colors";
-import View from "../../view";
-import { Typography } from "../typography";
+import { AppColorUnion } from '@/constants/Colors';
+import View from '../../view';
+import { Typography } from '../typography';
 
 export type ButtonProps = {
   children: ReactNode;
-  variant?: "primary" | "secondary" | "outlined";
-  style?: ViewProps["style"];
+  variant?: 'primary' | 'secondary' | 'outlined';
+  style?: ViewProps['style'];
   color?: AppColorUnion;
   textColor?: AppColorUnion;
   iconBefore?: React.ReactNode;
@@ -22,10 +22,10 @@ export type ButtonProps = {
 export function Button(props: ButtonProps) {
   const {
     children,
-    variant = "primary",
+    variant = 'primary',
     disabled = false,
     style,
-    color = "primary-500",
+    color = 'primary-500',
     textColor,
     iconBefore,
     iconAfter,
@@ -36,23 +36,23 @@ export function Button(props: ButtonProps) {
   const { Colors } = useAppTheme();
 
   const backgroundColor =
-    variant === "primary"
+    variant === 'primary'
       ? disabled
-        ? Colors["line-stroke-30"]
+        ? Colors['line-stroke-30']
         : Colors[color]
-      : variant === "outlined"
-      ? "transparent"
-      : Colors.white;
+      : variant === 'outlined'
+        ? 'transparent'
+        : Colors.white;
 
-  const borderColor = disabled ? Colors["line-stroke-30"] : Colors[color];
+  const borderColor = disabled ? Colors['line-stroke-30'] : Colors[color];
 
   const computedTextColor =
     textColor ||
-    (variant === "primary" ? "white" : disabled ? "line-stroke-30" : color);
+    (variant === 'primary' ? 'white' : disabled ? 'line-stroke-30' : color);
 
   const renderContent = () => {
     const labelContent =
-      typeof children === "string" ? (
+      typeof children === 'string' ? (
         <Typography
           fontFamily="OpenSans-Semibold"
           color={computedTextColor}
@@ -84,7 +84,7 @@ export function Button(props: ButtonProps) {
             {
               borderColor,
               backgroundColor,
-              borderWidth: variant === "outlined" ? 2 : 1,
+              borderWidth: variant === 'outlined' ? 2 : 1,
             },
             style,
           ]}
@@ -97,11 +97,11 @@ export function Button(props: ButtonProps) {
                 styles.mask,
                 {
                   backgroundColor: `${Colors[color]}${
-                    variant === "primary"
-                      ? "80"
-                      : variant === "outlined"
-                      ? "14"
-                      : "0D"
+                    variant === 'primary'
+                      ? '80'
+                      : variant === 'outlined'
+                        ? '14'
+                        : '0D'
                   }`,
                 },
               ]}
@@ -118,25 +118,25 @@ const styles = StyleSheet.create({
     borderRadius: 100,
     minHeight: 44,
     paddingVertical: 4,
-    justifyContent: "center",
-    alignItems: "center",
-    overflow: "hidden",
+    justifyContent: 'center',
+    alignItems: 'center',
+    overflow: 'hidden',
   },
   contentWrapper: {
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   childrenWrapper: {
-    flexDirection: "row",
+    flexDirection: 'row',
     paddingHorizontal: 16,
-    alignItems: "center",
+    alignItems: 'center',
   },
   text: {
-    textAlign: "center",
+    textAlign: 'center',
   },
   mask: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
   },
 });

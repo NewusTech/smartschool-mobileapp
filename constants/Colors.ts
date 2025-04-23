@@ -54,7 +54,7 @@ export const AppColor = {
     white: '#FFFFFF',
     black: '#000000',
     'neutral-50': '#FEFEFE',
-    'neutal-100': '#F1F1F1',
+    'neutral-100': '#F1F1F1',
     'neutral-700': '#C4C4C4',
     line: '#C7C7CD',
 
