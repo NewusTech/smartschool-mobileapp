@@ -18,13 +18,24 @@ interface IBadgeProps {
 const Badge = ({
   borderRadius = 50,
   borderWidth = 1,
-  color,
+  color = 'primary-500',
   fontSize,
   title,
   type,
   position = '',
 }: IBadgeProps) => {
   const { Colors } = useAppTheme();
+
+  const backgroundColor = useMemo(() => {
+    switch (color) {
+      case 'success-700':
+        return '#D9FFDB33';
+      case 'error-500':
+        return '#FFC3C333';
+      default:
+        return '#F1F1F1';
+    }
+  }, [color]);
 
   const typeStyle = useMemo(() => {
     const baseStyle: ViewStyle = {
@@ -37,7 +48,8 @@ const Badge = ({
       return {
         ...baseStyle,
         borderWidth,
-        borderColor: Colors[color as AppColorUnion],
+        borderColor: Colors[color],
+        backgroundColor,
       };
     }
 
@@ -45,7 +57,15 @@ const Badge = ({
       ...baseStyle,
       backgroundColor: Colors[color as AppColorUnion],
     };
-  }, [Colors, borderRadius, borderWidth, color, position, type]);
+  }, [
+    Colors,
+    backgroundColor,
+    borderRadius,
+    borderWidth,
+    color,
+    position,
+    type,
+  ]);
 
   return (
     <View style={typeStyle}>

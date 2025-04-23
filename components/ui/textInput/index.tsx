@@ -23,6 +23,7 @@ export type TextInputProps = {
   textAlignVertical?: 'top' | 'center';
   iconBefore?: ReactNode;
   color?: AppColorUnion;
+  hintMessage?: string;
 } & RNTextInputProps;
 export default function TextInput(props: TextInputProps) {
   const {
@@ -36,6 +37,7 @@ export default function TextInput(props: TextInputProps) {
     textAlignVertical = 'center',
     color = 'line-stroke-50',
     iconBefore = undefined,
+    hintMessage = '',
     ...rest
   } = props;
 
@@ -90,11 +92,23 @@ export default function TextInput(props: TextInputProps) {
           ))}
       </View>
 
-      {!!errorMessage && (
-        <Typography fontFamily="Poppins-Light" fontSize={10} color="error-50">
-          {errorMessage}
-        </Typography>
-      )}
+      <View>
+        {!!errorMessage && (
+          <Typography fontFamily="Poppins-Light" fontSize={10} color="error-50">
+            {errorMessage}
+          </Typography>
+        )}
+        {!!hintMessage && (
+          <Typography
+            fontFamily="Poppins-Light"
+            fontSize={10}
+            color="text-secondary"
+            style={{ alignSelf: 'flex-end' }}
+          >
+            {hintMessage}
+          </Typography>
+        )}
+      </View>
     </View>
   );
 }
