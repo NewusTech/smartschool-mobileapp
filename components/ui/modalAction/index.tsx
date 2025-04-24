@@ -1,26 +1,33 @@
 import View from '@/components/view';
 import React, { useEffect, useRef } from 'react';
-import { Animated, Image, Modal } from 'react-native';
+import { Animated, Image, ImageSourcePropType, Modal } from 'react-native';
 
-import { ThemedText } from '@/components/ThemedText';
 import { Button } from '../button';
 import Loader from '../loader';
 import { Typography } from '../typography';
 
 type ModalAction = {
+  image?: ImageSourcePropType;
   visible: boolean;
   onAction: () => void;
   isLoading: boolean;
   title?: string;
+  description?: string;
+  labelPositive?: string;
+  labelNegative?: string;
   onNegativeAction?: () => void;
 };
 
 export default function ModalAction({
+  image = require('../../../assets/images/question.png'),
   visible,
   onAction,
   onNegativeAction,
   isLoading = false,
+  labelNegative = 'Batal',
+  labelPositive = 'Ya',
   title = '',
+  description = '',
 }: ModalAction) {
   const translateY = useRef(new Animated.Value(300)).current;
   const opacity = useRef(new Animated.Value(0)).current;
@@ -60,26 +67,32 @@ export default function ModalAction({
             transform: [{ translateY }],
             opacity,
             paddingVertical: 30,
-            paddingHorizontal: 20,
+            paddingHorizontal: 16,
             borderRadius: 20,
             backgroundColor: 'white',
             alignItems: 'center',
-            gap: 20,
+            gap: 12,
             margin: 'auto',
             width: '80%',
           }}
         >
           <Image
-            source={require('../../../assets/images/question.png')}
+            source={image}
             style={{
               width: 60,
               height: 60,
               alignSelf: 'center',
             }}
           />
-          <ThemedText type="defaultSemiBold" style={{ textAlign: 'center' }}>
+          <Typography fontFamily="Poppins-Bold" style={{ textAlign: 'center' }}>
             {title}
-          </ThemedText>
+          </Typography>
+
+          {!!description && (
+            <Typography style={{ textAlign: 'center' }}>
+              {description}
+            </Typography>
+          )}
 
           <View
             style={{
@@ -90,7 +103,7 @@ export default function ModalAction({
           >
             <View style={{ width: '50%' }}>
               <Button variant="outlined" onPress={onNegativeAction}>
-                Batal
+                {labelNegative}
               </Button>
             </View>
 
@@ -104,7 +117,7 @@ export default function ModalAction({
                     fontSize={14}
                     color="white"
                   >
-                    Ya
+                    {labelPositive}
                   </Typography>
                 )}
               </Button>
