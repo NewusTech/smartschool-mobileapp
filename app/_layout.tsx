@@ -5,10 +5,12 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
+import NoInternet from '@/components/ui/noInternet';
 import { appFonts } from '@/components/ui/typography';
 import { AppThemeProvider } from '@/context/theme-context';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { queryClient } from '@/lib/transtack-query';
+import { useNetInfo } from '@react-native-community/netinfo';
 import { QueryClientProvider } from '@tanstack/react-query';
 import React from 'react';
 import Toast from 'react-native-toast-message';
@@ -52,28 +54,24 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
+  const { isConnected } = useNetInfo();
 
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider
-          value={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}
-        >
-          <AppThemeProvider>
-            <Stack
-              screenOptions={{
-                headerShown: false,
-                animation: 'ios_from_right',
-              }}
-            />
-            <Toast />
-          </AppThemeProvider>
-        </ThemeProvider>
-      </QueryClientProvider>
-
-      {/* {!animationCompleted && (
-        <CustomSplashScreen onFinish={changeAnimationStatus} />
-      )} */}
-    </>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider
+        value={colorScheme === 'dark' ? DefaultTheme : DefaultTheme}
+      >
+        <AppThemeProvider>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              animation: 'ios_from_right',
+            }}
+          />
+          <Toast />
+          <NoInternet isConnected={isConnected || true} />
+        </AppThemeProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
