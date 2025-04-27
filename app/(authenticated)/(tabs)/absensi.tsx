@@ -3,7 +3,6 @@ import { FlatList, StyleSheet } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 
 import { ThemedView } from '@/components/ThemedView';
-import Header from '@/components/ui/header';
 import Loader from '@/components/ui/loader';
 import { Typography } from '@/components/ui/typography';
 import View from '@/components/view';
@@ -116,7 +115,7 @@ export default function AttendanceScreen() {
   if (isLoading) return <Loader />;
 
   return (
-    <ParallaxScrollView headerImage={<Header />}>
+    <ParallaxScrollView>
       <ThemedView style={styles.container}>
         <View style={styles.cardAttendance}>
           <Typography fontSize={14} fontFamily="Poppins-Bold">
@@ -179,7 +178,7 @@ export default function AttendanceScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { marginHorizontal: 20, borderRadius: 6, marginTop: 32 },
+  container: { marginHorizontal: 20, borderRadius: 6, marginTop: 24 },
   iconAttendance: {
     width: 20,
     height: 20,
@@ -201,7 +200,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 8,
     height: 120,
-    width: 120,
+    maxWidth: 120,
     borderColor: '#EAF2F9',
     justifyContent: 'flex-start',
     padding: 12,
@@ -221,7 +220,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   labelAbsent: { flexWrap: 'wrap', lineHeight: 16 },
-  attendanceList: { marginHorizontal: 20, borderRadius: 6, marginBottom: 20 },
+  attendanceList: { marginHorizontal: 20, borderRadius: 6, marginVertical: 20 },
   itemAttendance: { flexDirection: 'row', alignItems: 'flex-start', flex: 1 },
   itemTypeAttendance: {
     flexDirection: 'row',

@@ -1,6 +1,5 @@
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
-import BackButton from '@/components/ui/backButton';
 import Badge from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
@@ -66,7 +65,7 @@ const ComplaintScreen = () => {
   );
 
   return (
-    <ParallaxScrollView headerImage={<BackButton title="Daftar Pengaduan" />}>
+    <ParallaxScrollView title="Daftar Pengaduan">
       <ThemedView style={styles.container}>
         <View style={styles.header}>
           <Typography fontSize={16} fontFamily="Poppins-Bold">

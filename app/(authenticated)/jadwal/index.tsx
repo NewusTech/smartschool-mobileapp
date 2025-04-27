@@ -2,7 +2,6 @@ import { FlatList, StyleSheet, View } from 'react-native';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
-import BackButton from '@/components/ui/backButton';
 import Badge from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Loader from '@/components/ui/loader';
@@ -190,7 +189,7 @@ const ScheduleScreen = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <ParallaxScrollView headerImage={<BackButton title="Jadwal Pelajaran" />}>
+    <ParallaxScrollView title="Jadwal Pelajaran">
       <ThemedView style={styles.container}>
         <Tabs tabs={DATA_DAY} onTabChange={(tab) => setTabActive(tab)} />
 
@@ -222,6 +221,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     marginBottom: 20,
+    marginTop: 24,
   },
   cardSchedule: {
     paddingHorizontal: 12,

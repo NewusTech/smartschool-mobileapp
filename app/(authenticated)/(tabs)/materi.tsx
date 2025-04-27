@@ -1,7 +1,6 @@
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
 import Badge from '@/components/ui/badge';
-import Header from '@/components/ui/header';
 import Tabs from '@/components/ui/tabs';
 import { Typography } from '@/components/ui/typography';
 import View from '@/components/view';
@@ -109,7 +108,7 @@ const ELearningScreen = () => {
   );
 
   return (
-    <ParallaxScrollView headerImage={<Header />}>
+    <ParallaxScrollView>
       <ThemedView style={styles.container}>
         <View style={{ marginTop: 12, gap: 16 }}>
           <FlatList

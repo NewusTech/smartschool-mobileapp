@@ -2,7 +2,6 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
 import AttachmentInput from '@/components/ui/attachment/attachmentInput';
 import Avatar from '@/components/ui/avatar';
-import BackButton from '@/components/ui/backButton';
 import Badge from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import Tabs from '@/components/ui/tabs';
@@ -183,7 +182,7 @@ const ELearningDetailScreen = () => {
   );
 
   return (
-    <ParallaxScrollView headerImage={<BackButton title="E-Learning & Tugas" />}>
+    <ParallaxScrollView title="E-Learning & Tugas">
       <ThemedView style={styles.container}>
         <View style={{ marginTop: 12, gap: 16 }}>
           <View>
@@ -248,6 +247,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     marginBottom: 20,
+    marginTop: 24,
   },
   card: {
     borderWidth: 1,

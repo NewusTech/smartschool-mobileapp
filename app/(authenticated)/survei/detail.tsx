@@ -1,6 +1,5 @@
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
-import BackButton from '@/components/ui/backButton';
 import { Button } from '@/components/ui/button';
 import ModalSuccess from '@/components/ui/modalSuccess';
 import RadioButton from '@/components/ui/radioButton';
@@ -74,7 +73,7 @@ const SurveyDetailScreen = () => {
   );
 
   return (
-    <ParallaxScrollView headerImage={<BackButton title="Pengisian Survei" />}>
+    <ParallaxScrollView title="Pengisian Survei">
       <ThemedView style={styles.container}>
         <View>
           <Typography
@@ -127,6 +126,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 8,
     padding: 16,
+    marginTop: 24,
   },
   card: {
     padding: 12,

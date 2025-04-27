@@ -1,6 +1,5 @@
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
-import BackButton from '@/components/ui/backButton';
 import FieldValue from '@/components/ui/fieldValue';
 import { Typography } from '@/components/ui/typography';
 import View from '@/components/view';
@@ -8,7 +7,7 @@ import { StyleSheet } from 'react-native';
 
 const InformationSchoolScreen = () => {
   return (
-    <ParallaxScrollView headerImage={<BackButton title="Informasi Sekolah" />}>
+    <ParallaxScrollView title="Informasi Sekolah">
       <ThemedView style={styles.container}>
         <Typography fontSize={16} fontFamily="Poppins-Bold">
           SDN Kebayoran Lama Utara 09 Pagi
