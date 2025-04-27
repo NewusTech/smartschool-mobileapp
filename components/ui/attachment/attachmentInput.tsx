@@ -5,6 +5,8 @@ import { Button } from '../button';
 import { Typography } from '../typography';
 
 import { useAppTheme } from '@/context/theme-context';
+import { useState } from 'react';
+import ModalAttachment, { ImageResult } from './modalAttachment';
 
 interface IAttachmentInputProps {
   enabled?: boolean;
@@ -18,6 +20,14 @@ const AttachmentInput = ({
   fileName = '',
 }: IAttachmentInputProps) => {
   const { Colors } = useAppTheme();
+
+  const [showModal, setShowModal] = useState<boolean>(false);
+
+  const handleOpenModal = () => setShowModal(!showModal);
+
+  const handleUploadFile = (file: ImageResult) => {
+    console.log(file);
+  };
 
   return (
     <View style={styles.container}>
@@ -45,6 +55,7 @@ const AttachmentInput = ({
               }}
             >
               <Button
+                onPress={handleOpenModal}
                 style={{ elevation: 8, paddingHorizontal: 20 }}
                 iconAfter={
                   <Feather name="upload" color={Colors.white} size={20} />
@@ -89,6 +100,12 @@ const AttachmentInput = ({
           <Feather name="upload" size={18} color={Colors['primary-500']} />
         </View>
       )}
+
+      <ModalAttachment
+        isVisible={showModal}
+        setIsVisible={setShowModal}
+        onUploadFile={handleUploadFile}
+      />
     </View>
   );
 };
