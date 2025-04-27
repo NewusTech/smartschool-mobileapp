@@ -70,7 +70,10 @@ export default function TextInput(props: TextInputProps) {
           <RNTextInput
             placeholderTextColor={Colors['line-stroke-30']}
             editable={editable}
-            style={[{ color: Colors['black-80'], textAlignVertical }, style]}
+            style={[
+              { color: Colors['black-80'], minHeight: 36, textAlignVertical },
+              style,
+            ]}
             secureTextEntry={secureTextEntry && hidePassword}
             {...rest}
             onFocus={() => setFocused(true)}

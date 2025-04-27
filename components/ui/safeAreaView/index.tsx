@@ -1,17 +1,17 @@
-import { useAppTheme } from "@/context/theme-context";
-import React, { PropsWithChildren, memo } from "react";
+import { useAppTheme } from '@/context/theme-context';
+import React, { PropsWithChildren, memo } from 'react';
 import {
   Platform,
   SafeAreaView as RNSafeAareaView,
   StatusBar,
   StyleProp,
   ViewStyle,
-} from "react-native";
+} from 'react-native';
 
-import { SafeAreaView as NativeSafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView as NativeSafeAreaView } from 'react-native-safe-area-context';
 
 const DefaultSafeAreaView =
-  Platform.OS === "ios" && parseInt(Platform.Version, 10) >= 11
+  Platform.OS === 'ios' && parseInt(Platform.Version, 10) >= 11
     ? RNSafeAareaView
     : NativeSafeAreaView;
 
@@ -26,19 +26,18 @@ function SafeAreaView({ children, style = undefined }: SafeAreaViewProps) {
 
   return (
     <>
-      <StatusBar
-        backgroundColor={Colors["primary-500"]}
-        barStyle="light-content"
-      />
+      <StatusBar backgroundColor={Colors.white} barStyle="light-content" />
 
       <DefaultSafeAreaView
         style={{
           flex: 0,
-          backgroundColor: Colors["primary-500"],
+          backgroundColor: Colors.white,
         }}
       />
 
-      <DefaultSafeAreaView style={style}>{children}</DefaultSafeAreaView>
+      <DefaultSafeAreaView style={[style, { backgroundColor: Colors.white }]}>
+        {children}
+      </DefaultSafeAreaView>
     </>
   );
 }
