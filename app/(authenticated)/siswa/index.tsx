@@ -3,7 +3,6 @@ import { FlatList, StyleSheet } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
 import Avatar from '@/components/ui/avatar';
-import BackButton from '@/components/ui/backButton';
 import TextInput from '@/components/ui/textInput';
 import { Typography } from '@/components/ui/typography';
 import View from '@/components/view';
@@ -52,7 +51,7 @@ export default function StudentScreen() {
   }, [search]);
 
   return (
-    <ParallaxScrollView headerImage={<BackButton title="Daftar Siswa" />}>
+    <ParallaxScrollView title="Daftar Siswa">
       <ThemedView style={styles.container}>
         <Typography fontSize={16} fontFamily="Poppins-Bold">
           Daftar Siswa Kelas 1-A
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     marginBottom: 20,
-    marginTop: 32,
+    marginTop: 24,
   },
   search: { marginTop: 16 },
   card: {

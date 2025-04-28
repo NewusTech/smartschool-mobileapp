@@ -1,7 +1,6 @@
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
 import AttachmentInput from '@/components/ui/attachment/attachmentInput';
-import BackButton from '@/components/ui/backButton';
 import Badge from '@/components/ui/badge';
 import TextInput from '@/components/ui/textInput';
 import { Typography } from '@/components/ui/typography';
@@ -13,7 +12,7 @@ const ComplaintDetailScreen = () => {
   const { status } = useLocalSearchParams();
 
   return (
-    <ParallaxScrollView headerImage={<BackButton title="Pengaduan Terkirim" />}>
+    <ParallaxScrollView title="Pengaduan Terkirim">
       <ThemedView style={styles.container}>
         <View
           style={{

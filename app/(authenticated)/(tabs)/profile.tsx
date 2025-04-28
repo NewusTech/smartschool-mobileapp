@@ -1,6 +1,5 @@
 import {
   Image,
-  Pressable,
   StyleSheet,
   TouchableOpacity,
   TouchableWithoutFeedback,
@@ -10,22 +9,18 @@ import {
 import IconEdit from '@/components/icons/IconEdit';
 import IconLogout from '@/components/icons/IconLogout';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { Ionicons } from '@expo/vector-icons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'expo-router';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Controller, useForm, useWatch } from 'react-hook-form';
 
-import {
-  IconCamera,
-  IconEye,
-  IconEyeSlice,
-  IconGallery,
-} from '@/components/icons';
+import { IconEye, IconEyeSlice } from '@/components/icons';
 import { ThemedView } from '@/components/ThemedView';
+import ModalAttachment, {
+  ImageResult,
+} from '@/components/ui/attachment/modalAttachment';
 import { Button } from '@/components/ui/button';
 import ModalAction from '@/components/ui/modalAction';
-import ModalSwipe from '@/components/ui/modalSwipe';
 import TextInput from '@/components/ui/textInput';
 import { Typography } from '@/components/ui/typography';
 import { maskingPassword } from '@/helpers';
@@ -78,6 +73,10 @@ export default function ProfileScreen() {
   );
 
   const handleUpdateProfile = () => {};
+
+  const handleUploadPhoto = (file: ImageResult) => {
+    console.log(file);
+  };
 
   useEffect(() => {
     setValue('name', 'Annisa Rachma');
@@ -350,31 +349,6 @@ export default function ProfileScreen() {
     [],
   );
 
-  const renderChangePhotoProfile = useMemo(
-    () => (
-      <ModalSwipe
-        title="Ubah Foto"
-        modalVisible={isChangePhotoProfile}
-        setModalVisible={handleChangePhotoProfile}
-      >
-        <Pressable
-          style={{ paddingVertical: 8, flexDirection: 'row', columnGap: 8 }}
-        >
-          <IconGallery color="text-default" />
-          <Typography color="text-secondary">Pilih Dari Galeri</Typography>
-        </Pressable>
-
-        <Pressable
-          style={{ paddingVertical: 8, flexDirection: 'row', columnGap: 8 }}
-        >
-          <IconCamera color="text-default" />
-          <Typography color="text-secondary">Ambil Foto</Typography>
-        </Pressable>
-      </ModalSwipe>
-    ),
-    [isChangePhotoProfile, handleChangePhotoProfile],
-  );
-
   const renderDialogConfirmationLogout = useMemo(
     () => (
       <ModalAction
@@ -389,21 +363,7 @@ export default function ProfileScreen() {
   );
 
   return (
-    <ParallaxScrollView
-      headerImage={
-        <ThemedView style={styles.titleContainer}>
-          <Image
-            source={require('../../../assets/images/logo.png')}
-            style={{
-              width: 153,
-              height: 48,
-              alignSelf: 'center',
-            }}
-          />
-          <Ionicons name="notifications-outline" size={24} color="black" />
-        </ThemedView>
-      }
-    >
+    <ParallaxScrollView>
       <ThemedView style={styles.card}>
         <View style={styles.cardHeader}>
           <Typography style={styles.title}>Profil</Typography>
@@ -424,15 +384,22 @@ export default function ProfileScreen() {
       {!isEdit && renderLogActivity}
 
       {isLogout && renderDialogConfirmationLogout}
-      {isChangePhotoProfile && renderChangePhotoProfile}
+      {isChangePhotoProfile && (
+        <ModalAttachment
+          isVisible={isChangePhotoProfile}
+          setIsVisible={setIsChangePhotoProfile}
+          onUploadFile={handleUploadPhoto}
+        />
+      )}
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: { flex: 1 },
   card: {
     borderRadius: 8,
-    marginBottom: 24,
+    marginTop: 24,
     marginHorizontal: 20,
     padding: 16,
   },

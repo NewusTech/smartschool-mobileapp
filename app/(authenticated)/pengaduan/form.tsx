@@ -1,7 +1,6 @@
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
 import AttachmentInput from '@/components/ui/attachment/attachmentInput';
-import BackButton from '@/components/ui/backButton';
 import { Button } from '@/components/ui/button';
 import ModalSuccess from '@/components/ui/modalSuccess';
 import TextInput from '@/components/ui/textInput';
@@ -27,9 +26,7 @@ const ComplaintFormScreen = () => {
   };
 
   return (
-    <ParallaxScrollView
-      headerImage={<BackButton title="Buat Pengaduan Baru" />}
-    >
+    <ParallaxScrollView title="Buat Pengaduan Baru">
       <ThemedView style={styles.container}>
         <Controller
           control={control}

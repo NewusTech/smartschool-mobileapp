@@ -72,7 +72,6 @@ const Badge = ({
       <Typography
         fontSize={fontSize}
         color={type === 'outlined' ? color : 'white'}
-        style={{ marginTop: 3 }}
       >
         {title}
       </Typography>

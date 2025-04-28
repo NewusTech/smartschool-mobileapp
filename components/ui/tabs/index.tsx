@@ -1,4 +1,4 @@
-import View from '@/components/view';
+import { ThemedView } from '@/components/ThemedView';
 import React, { memo, useState } from 'react';
 import {
   ScrollView,
@@ -31,7 +31,7 @@ const Tabs = ({ tabs, onTabChange }: ITabsProps) => {
           key={index}
           onPress={() => handleTabPress(index)}
         >
-          <View
+          <ThemedView
             style={[
               styles.tab,
               {
@@ -47,7 +47,7 @@ const Tabs = ({ tabs, onTabChange }: ITabsProps) => {
             >
               {tab}
             </Text>
-          </View>
+          </ThemedView>
         </TouchableWithoutFeedback>
       ))}
     </ScrollView>

@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
 import Avatar from '@/components/ui/avatar';
-import BackButton from '@/components/ui/backButton';
 import { Button } from '@/components/ui/button';
 import Tabs from '@/components/ui/tabs';
 import { Typography } from '@/components/ui/typography';
@@ -16,7 +15,7 @@ export default function StudentScreen() {
   const [tabActive, setTabActive] = useState<number>(0);
 
   return (
-    <ParallaxScrollView headerImage={<BackButton title="E-Rapor Tugas" />}>
+    <ParallaxScrollView title="E-Rapor Tugas">
       <ThemedView style={styles.container}>
         <Typography fontSize={16} fontFamily="Poppins-Bold">
           E-Rapor
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     marginBottom: 20,
-    marginTop: 32,
+    marginTop: 24,
   },
   header: {
     flexDirection: 'row',

@@ -1,6 +1,5 @@
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
-import BackButton from '@/components/ui/backButton';
 import Badge from '@/components/ui/badge';
 import { Typography } from '@/components/ui/typography';
 import View from '@/components/view';
@@ -56,7 +55,7 @@ const SurveyScreen = () => {
   );
 
   return (
-    <ParallaxScrollView headerImage={<BackButton title="Survei" />}>
+    <ParallaxScrollView title="Survei">
       <ThemedView style={styles.container}>
         <View>
           <Typography fontSize={16} fontFamily="Poppins-Bold">

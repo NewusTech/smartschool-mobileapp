@@ -15,7 +15,6 @@ import { Button } from '@/components/ui/button';
 import BarChart from '@/components/ui/chart/BarChart';
 import GroupedBarChart from '@/components/ui/chart/GroupedBarChart';
 import ProgressBarChart from '@/components/ui/chart/ProgressBarChart';
-import Header from '@/components/ui/header';
 import { Typography } from '@/components/ui/typography';
 import View from '@/components/view';
 import { DATA_MENU } from '@/constants';
@@ -114,6 +113,7 @@ export default function HomeScreen() {
         resizeMode="cover"
         style={{
           marginHorizontal: 20,
+
           borderRadius: 8,
           paddingHorizontal: 12,
           paddingVertical: 8,
@@ -174,7 +174,7 @@ export default function HomeScreen() {
               key={item.id}
               style={{
                 alignItems: 'center',
-                width: '20%',
+                // width: '20%',
               }}
             >
               <View
@@ -497,9 +497,7 @@ export default function HomeScreen() {
 
   const renderAttendancePercentage = useMemo(
     () => (
-      <ThemedView
-        style={{ marginHorizontal: 20, borderRadius: 6, marginBottom: 20 }}
-      >
+      <ThemedView style={{ marginHorizontal: 20, borderRadius: 6 }}>
         <View style={styles.cardAttendance}>
           <Typography fontSize={16} fontFamily="Poppins-Bold">
             Presentase Kehadiran Siswa
@@ -547,15 +545,17 @@ export default function HomeScreen() {
   );
 
   return (
-    <ParallaxScrollView headerImage={<Header />}>
-      {renderInformation}
-      {renderMenu}
-      {renderSchedule}
-      {renderChartScore}
-      {renderChartAverageTime}
-      {renderChartForumDiscussion}
-      {reminderExam}
-      {renderAttendancePercentage}
+    <ParallaxScrollView>
+      <View style={{ gap: 20 }}>
+        {renderInformation}
+        {renderMenu}
+        {renderSchedule}
+        {renderChartScore}
+        {renderChartAverageTime}
+        {renderChartForumDiscussion}
+        {reminderExam}
+        {renderAttendancePercentage}
+      </View>
     </ParallaxScrollView>
   );
 }
@@ -572,20 +572,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
-  container: { alignItems: 'center', marginTop: 20 },
-  tooltip: {
-    position: 'absolute',
-    top: 50,
-    left: 100,
-    backgroundColor: 'white',
-    padding: 8,
-    borderRadius: 5,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 5,
-  },
+
   cardSchedule: {
     paddingHorizontal: 12,
     borderRadius: 8,
@@ -629,7 +616,7 @@ const styles = StyleSheet.create({
     borderWidth: 0.5,
     borderRadius: 8,
     height: 120,
-    width: 120,
+    maxWidth: 120,
     borderColor: '#EAF2F9',
     justifyContent: 'flex-start',
     padding: 12,

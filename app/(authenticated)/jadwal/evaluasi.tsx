@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
-import BackButton from '@/components/ui/backButton';
 import { Button } from '@/components/ui/button';
 
 import SelectInput, { DataItem } from '@/components/ui/selectInput';
@@ -41,7 +40,7 @@ const FormEvaluationScreen = () => {
   ];
 
   return (
-    <ParallaxScrollView headerImage={<BackButton title="Form Evaluasi" />}>
+    <ParallaxScrollView title="Form Evaluasi">
       <ThemedView style={styles.container}>
         <Typography fontSize={16} fontFamily="Poppins-Bold">
           Form Evaluasi Pembelajaran
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 16,
     marginBottom: 20,
-    marginTop: 32,
+    marginTop: 24,
   },
   buttonSave: {
     marginTop: 24,

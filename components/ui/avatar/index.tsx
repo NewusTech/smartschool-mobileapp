@@ -1,35 +1,35 @@
-import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import React, { memo } from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
 
-type AvatarProps = {
+interface IAvatarProps {
   borderRadius?: number;
   name: string;
   size?: number;
   source?: string;
-};
-
-const getInitials = (name: string) => {
-  return name
-    .split(" ")
-    .map((n) => n[0])
-    .join("")
-    .toUpperCase()
-    .slice(0, 2);
-};
+}
 
 const Avatar = ({
-  source,
+  source = '../../../assets/images/student.png',
   name,
   size = 50,
   borderRadius = 25,
-}: AvatarProps) => {
+}: IAvatarProps) => {
+  const getInitials = (name: string) => {
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .toUpperCase()
+      .slice(0, 2);
+  };
+
   return (
     <View
       style={[styles.container, { width: size, height: size, borderRadius }]}
     >
       {source ? (
         <Image
-          source={require("../../../assets/images/student.png")}
+          source={require('../../../assets/images/student.png')}
           style={[styles.image, { width: size, height: size, borderRadius }]}
         />
       ) : (
@@ -48,23 +48,23 @@ const Avatar = ({
 
 const styles = StyleSheet.create({
   container: {
-    overflow: "hidden",
-    alignItems: "center",
-    justifyContent: "center",
+    overflow: 'hidden',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   image: {
-    resizeMode: "cover",
+    resizeMode: 'cover',
   },
   placeholder: {
-    backgroundColor: "#ccc",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#ccc',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   text: {
-    color: "#fff",
+    color: '#fff',
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
 
-export default Avatar;
+export default memo(Avatar);

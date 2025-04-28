@@ -2,7 +2,6 @@ import IconTimer from '@/components/icons/IconTimer';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
 import AttachmentInput from '@/components/ui/attachment/attachmentInput';
-import BackButton from '@/components/ui/backButton';
 import { Button } from '@/components/ui/button';
 import ModalAction from '@/components/ui/modalAction';
 import ModalSuccess from '@/components/ui/modalSuccess';
@@ -232,11 +231,7 @@ const ELearningFormScreen = () => {
   );
 
   return (
-    <ParallaxScrollView
-      headerImage={
-        <BackButton onBackButton={handleOnBack} title="E-Learning & Tugas" />
-      }
-    >
+    <ParallaxScrollView onBackPress={handleOnBack} title="E-Learning & Tugas">
       <ThemedView style={styles.container}>
         <Typography fontFamily="Poppins-Bold" color="primary-500">
           Matematika
@@ -282,6 +277,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 8,
     padding: 16,
+    marginTop: 24,
   },
   containerTimer: {
     padding: 12,

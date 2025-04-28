@@ -1,6 +1,6 @@
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedView } from '@/components/ThemedView';
-import BackButton from '@/components/ui/backButton';
+import SafeAreaView from '@/components/ui/safeAreaView';
 import { Typography } from '@/components/ui/typography';
 import View from '@/components/view';
 import { useCallback, useEffect, useState } from 'react';
@@ -89,27 +89,29 @@ const NotificationScreen = () => {
   );
 
   return (
-    <ParallaxScrollView headerImage={<BackButton title="Notifikasi" />}>
-      <ThemedView style={styles.card}>
-        <View style={styles.containerHeader}>
-          <Typography fontFamily="Poppins-Bold">Notifikasi</Typography>
-          <Pressable>
-            <Typography color="primary-500" fontFamily="Poppins-Bold">
-              Tandai Semua
-            </Typography>
-          </Pressable>
-        </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ParallaxScrollView title="Notifikasi">
+        <ThemedView style={styles.card}>
+          <View style={styles.containerHeader}>
+            <Typography fontFamily="Poppins-Bold">Notifikasi</Typography>
+            <Pressable>
+              <Typography color="primary-500" fontFamily="Poppins-Bold">
+                Tandai Semua
+              </Typography>
+            </Pressable>
+          </View>
 
-        <FlatList
-          data={DATA_NOTIFICATION}
-          renderItem={renderItem}
-          style={styles.container}
-          ItemSeparatorComponent={renderSeparator}
-          ListFooterComponent={renderSeparator}
-          scrollEnabled={false}
-        />
-      </ThemedView>
-    </ParallaxScrollView>
+          <FlatList
+            data={DATA_NOTIFICATION}
+            renderItem={renderItem}
+            style={styles.container}
+            ItemSeparatorComponent={renderSeparator}
+            ListFooterComponent={renderSeparator}
+            scrollEnabled={false}
+          />
+        </ThemedView>
+      </ParallaxScrollView>
+    </SafeAreaView>
   );
 };
 
